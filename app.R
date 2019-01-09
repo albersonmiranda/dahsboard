@@ -387,7 +387,7 @@ g7<- plot_ly(data = IPCA, x=~date, y=~value,
         add_trace(IGPM, x=IGPM$date, y=IGPM$value, name = "IGPM", mode = "lines") %>%
         add_trace(IPCBr, x=IPCBr$date, y=IPCBr$value, name = "IPCBr", mode = "lines") %>%
         add_trace(ICV, x=ICV$date, y=ICV$value, name = "ICV", mode = "lines") %>%
-        layout(title = "", xaxis = list(title = ""),
+        layout(title = "", xaxis = list(title = ""), yaxis = list(title = 'Variação %'),
                shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                              x0 = "2014", x1 = "2017", xref = "x",
                              y0 = -1, y1 = 5, yref = "y"),
@@ -400,7 +400,7 @@ g7<- plot_ly(data = IPCA, x=~date, y=~value,
 g8 <- plot_ly(data = Renda, x=~date, y=~value,
               type = "scatter", mode = "lines", name = "Renda Média") %>%
   add_trace(Rendas, y=Rendas$value, name = "Renda Média Dessazonalizada", mode = "lines") %>%
-  layout(title = "", xaxis = list(title = ""),
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = 'R$'),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                        x0 = "2014", x1 = "2017", xref = "x",
                        y0 = 1000, y1 = 3000, yref = "y"),
@@ -491,7 +491,7 @@ g14<- plot_ly(data = InadES, x=~date, y=~value,
 g15<- plot_ly(data = SaldoPJES, x=~date, y=~value/1000,
               type = "scatter", mode = "lines", name = "Pessoa Jurídica") %>%
   add_trace(data = SaldoPFES, y=SaldoPFES$value/1000, name = "Pessoa Física") %>%
-  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "bilhões"),
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "R$ bilhões"),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                        x0 = "2014", x1 = "2017", xref = "x",
                        y0 = 0, y1 = 30, yref = "y"),
@@ -538,8 +538,8 @@ g18<- plot_ly(data = ExpES, x=~date, y=~value/1000,
 
 # Dólar
 g19<- plot_ly(data = Dolar, x=~date, y=~value,
-             type = 'scatter', mode = 'lines', name = "R$/US$") %>%
-  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "% a.a."),
+             type = 'scatter', mode = 'lines', name = "Dólar") %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "R$/US$"),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                        x0 = "2014", x1 = "2017", xref = "x",
                        y0 = 1, y1 = 4.5, yref = "y"),
