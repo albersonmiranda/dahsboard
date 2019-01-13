@@ -211,7 +211,7 @@ r6<-boxPlus(title = tags$b("CRÉDITO", style = 'font-family: "Georgia"'),
                "A lenta retomada da economia e o mercado de trabalho fragilizado continuam contribuindo para desaceleração do consumo e, consequentemente, da demanda por crédito. Embora em crescimento, a demanda por crédito foi bem aquém do projetado para o trimestre, conforme a Pesquisa Trimestral de Condições de Crédito do Departamento de Estudos e Pesquisas do Banco Central, frustando as expectativas do mercado de crédito pelo segundo trimestre consecutivo.",
                br(),br(),
                "Pelo lado da oferta, houve melhora da percepção do mercado em relação ao risco de crédito, revertendo o resultado negativo do trimestre anterior. Entretanto, a oferta também esteve abaixo da expectativa para o trimestre.",
-               br(),br(), br(),
+               br(),br(),
                "Os dados da Pesquisa de Endividamento e Inadimplência do Consumidor (Peic) realizada pela Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), mostram que duas em cada dez famílias brasileiras têm mais da metade da sua renda mensal comprometida com o pagamento de dívidas. Em novembro, a proporção das famílias com dívidas era de 60,3% - menos do que os 60,7% observados em outubro e do que os 62,2% registrados em novembro de 2017.",
                br(),br(),
                "'Entretanto, as famílias brasileiras se mostraram mais otimistas em relação à sua capacidade de pagamento', diz a economista responsável pelo estudo da CNC Marianne Hanson. Segundo ela, a queda na inadimplência vem acompanhando um patamar menor de endividamento e a redução do comprometimento da renda das famílias destinada ao pagamento de dívidas.",
@@ -260,7 +260,7 @@ Boxu<-widgetUserBox(
       type = "twitter"
     ),
     socialButton(
-      url = "https://www.linkedin.com/in/alberson-miranda-0a8258169/",
+      url = "https://www.linkedin.com/in/albersonmiranda/",
       type = "linkedin"
   )
   ),
