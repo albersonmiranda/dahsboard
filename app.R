@@ -22,8 +22,13 @@ PIBES1<-read.xlsx('Series.xlsx', sheet = 19); PIBES1$date<-convertToDate(PIBES1$
 PIBES2<-read.xlsx('Series.xlsx', sheet = 20); PIBES2$date<-convertToDate(PIBES2$date)
 AtividadeES<-read.xlsx('Series.xlsx', sheet = 21); AtividadeES$date<-convertToDate(AtividadeES$date)
 AtividadeESs<-read.xlsx('Series.xlsx', sheet = 22); AtividadeESs$date<-convertToDate(AtividadeESs$date)
+Varejo<-read.xlsx('Series.xlsx', sheet = 40); Varejo$date<-convertToDate(Varejo$date)
+Servicos<-read.xlsx('Series.xlsx', sheet = 41); Servicos$date<-convertToDate(Servicos$date)
 VarejoES<-read.xlsx('Series.xlsx', sheet = 28); VarejoES$date<-convertToDate(VarejoES$date)
 ServicosES<-read.xlsx('Series.xlsx', sheet = 29); ServicosES$date<-convertToDate(ServicosES$date)
+PIBVA<-read.xlsx('Series.xlsx', sheet = 39); PIBVA$date<-convertToDate(PIBVA$date)
+ExpES<-read.xlsx('Series.xlsx', sheet = 37); ExpES$date<-convertToDate(ExpES$date)
+ExpBR<-read.xlsx('Series.xlsx', sheet = 42); ExpBR$date<-convertToDate(ExpBR$date)
 
 # Consumo
 Consumo<-read.xlsx('Series.xlsx', sheet = 5); Consumo$date<-convertToDate(Consumo$date)
@@ -58,7 +63,6 @@ Selic<-read.xlsx('Series.xlsx', sheet = 11); Selic$date<-convertToDate(Selic$dat
 Dolar<-read.xlsx('Series.xlsx', sheet = 12); Dolar$date<-convertToDate(Dolar$date)
 Desemprego<-read.xlsx('Series.xlsx', sheet = 13); Desemprego$date<-convertToDate(Desemprego$date)
 EmpregoES<-read.xlsx('Series.xlsx', sheet = 30); EmpregoES$date<-convertToDate(EmpregoES$date) # Nivel de Emprego Formal
-ExpES<-read.xlsx('Series.xlsx', sheet = 37); ExpES$date<-convertToDate(ExpES$date)
 
 # Inflação
 IPCA<-read.xlsx('Series.xlsx', sheet = 14); IPCA$date<-convertToDate(IPCA$date)
@@ -67,17 +71,20 @@ IPCBr<-read.xlsx('Series.xlsx', sheet = 16); IPCBr$date<-convertToDate(IPCBr$dat
 ICV<-read.xlsx('Series.xlsx', sheet = 17); ICV$date<-convertToDate(ICV$date)
 CestaVix<-read.xlsx('Series.xlsx', sheet = 38); CestaVix$date<-convertToDate(CestaVix$date)
 
-# Banco #
-
-#Marketshare - Pizza
-#Inadimplencia - histograma dias de atraso
-#Inadimplencia - boxplot ou histograma concentrado pulverizado x dias de atraso
-#Inadimplencia - boxplot ou histograma produtos x dias de atraso
+lb<- 4 # Largura Boxes
+hb1<-760 # Atividade econômica
+hb2<-760 # Atividade econômica ES
+hb3<-700 # Mercados
+hb4<-852 # Inflação
+hb5<-760 # Consumo
+hb6<-800 # Crédito
 
 ## Resenhas ##
+
 r1<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb1,
             status = NULL,
             background = "yellow",
             solidHeader = TRUE,
@@ -89,61 +96,42 @@ r1<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA", style = 'font-family: "Georgi
               "O indice de Atividade Economica do Banco Central (IBC-Br) que, com cautela, pode ser utilizado como sinalizador do Produto Interno Bruto (PIB), apresentou avanco de 0,02 por cento em outubro na comparacao com o mes anterior, de acordo com dado dessazonalizado divulgado BC.",
               br(),br(),
               "O desempenho foi melhor que a expectativa em pesquisa da Reuters de contracao de 0,20 por cento, representando o quinto resultado positivo no ano."
-            ),
-            br(),
-            h4(style = 'text-align: center; font-family: "Georgia"',
-               tags$b("Crescimento do PIB 3T:")
-            ),
-            h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"0,8%")
+            )
 )
 
 r2<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA ES", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb2,
             status = NULL,
             background = "yellow",
             solidHeader = TRUE,
             collapsible = TRUE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
-               "O Produto Interno Bruto (PIB) do Espírito Santo vem mantendo bom desempenho em 2018. Dados divulgados pelo Instituto Jones dos Santos Neves (IJSN) referentes ao terceiro trimestre de 2018 mostram que o ritmo de crescimento da economia capixaba neste ano avançou 2,3% no acumulado do ano em comparação ao mesmo período do ano anterior. O número representa mais que o dobro do resultado nacional, que ficou em 1,1% na mesma base de comparação.",
-               br(),br(),
-               "O desempenho positivo no ano vem sendo garantido pelo comércio varejista ampliado, que acumula alta de 14,5%, graças à expansão de 7,5% do varejo restrito e, especialmente, ao aumento de 27% registrado nas vendas de veículos, motocicletas, parte e peças. Os setores Indústria e Serviços ainda sofrem com retração de -2,6% e -0,5% no acumulado do ano, respectivamente.",
-               br(),br(),
-               "Nas demais bases de comparação apresentadas pelo estudo, a atividade econômica capixaba registrou variações positivas em outras duas medidas das quatro consideradas. Na comparação com o mesmo trimestre do ano anterior e no acumulado de quatro trimestres, as expansões foram de 2,7% e 2,0%, respectivamente. No confronto com o trimestre imediatamente anterior, houve retração de -1,7%."
-            ),
-            br(),
-            h4(style = 'text-align: center; font-family: "Georgia"',
-               tags$b("Variação do PIB 3T:")
-            ),
-            h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"-1,7%")
+               "O Produto Interno Bruto (PIB) do Espírito Santo vem mantendo bom desempenho em 2018. Dados divulgados pelo Instituto Jones dos Santos Neves (IJSN) referentes ao terceiro trimestre de 2018 mostram que o ritmo de crescimento da economia capixaba neste ano avançou 2,3% no acumulado do ano em comparação ao mesmo período do ano anterior. O número representa mais que o dobro do resultado nacional, que ficou em 1,1% na mesma base de comparação."),
+            br()
 )
 
 r3<-boxPlus(title = tags$b("CONSUMO", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb5,
             status = NULL,
             background = "light-blue",
             solidHeader = TRUE,
             collapsible = TRUE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
-               "Um dos principais motores da economia, o consumo das famílias reduziu seu ritmo de crescimento no 2T de 2018, divulgou o IBGE. Apesar da alta de 1,7% no trimestre, se comparado ao mesmo período de 2017, houve crescimento de apenas 0,1% em relção ao semestre anterior. Contribuem para esse cenário o aumento da informalidade no mercado de trabalho e estagnação da renda.",
-               br(),br(),
-               "",
-               br(),br(),
-               ""
-            ),
-            br(),
-            h4(style = 'text-align: center; font-family: "Georgia"',
-               tags$b("Consumo das Famílias 3T:")
-            ),
-            h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"0,1%")
+               "Um dos principais motores da economia, o consumo das famílias reduziu seu ritmo de crescimento no 2T de 2018, divulgou o IBGE. Apesar da alta de 1,7% no trimestre, se comparado ao mesmo período de 2017, houve crescimento de apenas 0,1% em relção ao semestre anterior. Contribuem para esse cenário o aumento da informalidade no mercado de trabalho e estagnação da renda."
+               ),
+            br()
 )
 
 r4<-boxPlus(title = tags$b("INFLAÇÃO", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb4,
             status = NULL,
             background = "red",
             solidHeader = TRUE,
@@ -155,53 +143,29 @@ r4<-boxPlus(title = tags$b("INFLAÇÃO", style = 'font-family: "Georgia"'),
                "A comportamento brando dos índices de inflação é essencial para a recuperação do consumo das famílias e do crédito, uma vez que os últimos dados mostram contração da renda média familiar durante o período de recessão.",
                br(),br(),
                "Para 2019, os economistas das instituições financeiras diminuíram a expectativa de inflação de 4,03% para 4,01%. A meta central do próximo ano é de 4,25%, e o intervalo de tolerância do sistema de metas varia de 2,75% a 5,75%."
-            ),
-            br(),
-            h4(style = 'text-align: center; font-family: "Georgia"',
-               tags$b("IPCA 11/2018:")
-            ),
-            h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"-0,21%")
+            )
 )
 
 r5<-boxPlus(title = tags$b("MERCADOS", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb3,
             status = NULL,
             background = "light-blue",
             solidHeader = TRUE,
             collapsible = TRUE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
-               "Na reunião desta quarta-feira (12), o Comitê de Política Monetária (Copom) decidiu manter a taxa básica de juros da economia, a Selic, em 6,5% ao ano. Foi a sexta manutenção consecutiva. A taxa está no seu menor patamar da história desde março deste ano.",
-               br(),br(),
-               "A decisão já era esperada pelos economistas. Isso porque a previsão é de que a inflação feche o ano em 3,71%, abaixo da meta de 4,5%. Além disso, a retomada da economia ainda é incerta.",
-               br(),br(),
-               "Para 2019, porém, é esperado um aumento dos juros, motivado por uma provável recuperação da economia. Na média, os analistas do mercado financeiro esperam que a Selic feche o próximo ano em 7,5%.",
-               br(),br(),
-               "Sobre o Dólar, o discurso de Jerome Powell, presidente do Federal Reserve (Fed), atingiu em cheio o ritmo de negócios do dólar, que acabou perdendo força contra as principais moedas globais. Com as declarações de Powell, o dólar fecha a semana acumulando queda de 4,08%, passando de R$ 3,8742 no fim da semana passada para R$ 3,7160.",
+               "Para 2019, é esperado um aumento dos juros, motivado por uma provável recuperação da economia. Na média, os analistas do mercado financeiro esperam que a Selic feche o próximo ano em 7,5%.",
                br(),br(),
                "No mercado de trabalho, a taxa de desemprego no Brasil recuou para 11,6% no trimestre encerrado em novembro, segundo dados divulgados pelo IBGE, se mantendo praticamente constante — caiu 0,1% em relação ao mês anterior. Não obstante, o sinal é positivo pois foi a oitava queda mensal consecutiva no país."
-            ),
-            br(),
-            fluidRow(
-              column(width = 6,
-                h4(style = 'text-align: center; font-family: "Georgia"',
-                   tags$b("SELIC:")
-                ),
-                h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"6,5%")
-              ),
-              column(width = 6,
-                h4(style = 'text-align: center; font-family: "Georgia"',
-                   tags$b("DÓLAR:")
-                ),
-                h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;'," R$ 3,7160")
-              )
             )
 )
 
 r6<-boxPlus(title = tags$b("CRÉDITO", style = 'font-family: "Georgia"'),
             closable = FALSE, 
-            width = 4,
+            width = lb,
+            height = hb6,
             status = NULL,
             background = "green",
             solidHeader = TRUE,
@@ -212,28 +176,7 @@ r6<-boxPlus(title = tags$b("CRÉDITO", style = 'font-family: "Georgia"'),
                br(),br(),
                "Pelo lado da oferta, houve melhora da percepção do mercado em relação ao risco de crédito, revertendo o resultado negativo do trimestre anterior. Entretanto, a oferta também esteve abaixo da expectativa para o trimestre.",
                br(),br(),
-               "Os dados da Pesquisa de Endividamento e Inadimplência do Consumidor (Peic) realizada pela Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), mostram que duas em cada dez famílias brasileiras têm mais da metade da sua renda mensal comprometida com o pagamento de dívidas. Em novembro, a proporção das famílias com dívidas era de 60,3% - menos do que os 60,7% observados em outubro e do que os 62,2% registrados em novembro de 2017.",
-               br(),br(),
-               "'Entretanto, as famílias brasileiras se mostraram mais otimistas em relação à sua capacidade de pagamento', diz a economista responsável pelo estudo da CNC Marianne Hanson. Segundo ela, a queda na inadimplência vem acompanhando um patamar menor de endividamento e a redução do comprometimento da renda das famílias destinada ao pagamento de dívidas.",
-               br(),br(),
-               "A principal causa, segundo levantamento do CDL Rio, indica o desemprego (55%) como a principal causa da inadimplência no comércio carioca, seguido pela diminuição da renda familiar (20%), atraso de pagamento (10%), descontrole de gastos (8%) e o costume de emprestar o nome a terceiros (7%).",
-               br(),br(),
                "O Espírito Santo ganhou destaque em setembro, quando um estudo da Fecomercio-SP apontou Vitória como a cidade de maior endividamento das famílias entre as capitais — 49%. Embora o endividamento não seja sinõnimo da inadimplência, o primeiro antecede o segundo e sua elevação representa um fator de risco a ser monitorado pelos bancos."
-            ),
-            br(),
-            fluidRow(
-              column(width = 6,
-                     h4(style = 'text-align: center; font-family: "Georgia"',
-                        tags$b("Crédito ES:")
-                     ),
-                     h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;', "4,9 Bi")
-              ),
-              column(width = 6,
-                     h4(style = 'text-align: center; font-family: "Georgia"',
-                        tags$b("Inadimplência ES:")
-                     ),
-                     h4(style = 'text-align: center; font-family: "Georgia"; font-size: 40px;',"3,58%")
-              )
             )
 )
 
@@ -548,6 +491,59 @@ g19<- plot_ly(data = Dolar, x=~date, y=~value,
                        xanchor = "center")
   )
 
+# PIB Variação Anual
+g20 <- plot_ly(data = PIBVA, x=~date, y=~value,
+              type = "bar", name = "PIB Anual"
+) %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "Variação %"),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = -4, y1 = 9, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
+  )
+
+# Servicos e Varejo BR
+g21<- plot_ly(data = Servicos, x=~date, y=~value,
+              type = "scatter", mode = "lines", name = "Serviços") %>%
+  add_trace(data = Varejo, y=Varejo$value, name = "Varejo") %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "Indice"),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = 77, y1 = 133, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
+  )
+
+# Exportações ES
+g22<- plot_ly(data = ExpBR, x=~date, y=~value/1000,
+              type = "scatter", mode = "lines", name = "Exportações ES") %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "US$ bi"),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = 2, y1 = 27, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
+  )
+
+# PIB ES Variação Anual
+datag4<-data.frame(x=datag3$x[-1], y=(datag3$y[-1]/(datag3$y[-nrow(datag3)])-1)*100)
+
+g23 <- plot_ly(data = datag4, x=~x, y=~y,
+               type = "bar", name = "PIB Anual"
+) %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "Variação %"),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = -10, y1 = 30, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
+  )
+
 ## Body ##
 
 # Titulo
@@ -557,17 +553,54 @@ Box0<-list(
   br()
 )
 
+# Variação PIB
+Box20<-
+  boxPlus(
+    title = tags$b("Produto Interno Bruto", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb1,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Crescimento do PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Variação % anual real", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    plotlyOutput("plot20"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("O resultado positivo de 2017 sinaliza o encerramento do período recessivo e início da retomada da economia.", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(PIBVA$value,1), 2), "%"), 
+          number_color = if(tail(PIBVA$value,1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(PIBVA$value,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = NULL, 
+          text = "var. % PIB", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
 # PIB Brasil
 Box1<-
   boxPlus(
     title = tags$b("Produto Interno Bruto", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Crescimento do PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Índice trimestral — valores observados a preço de mercado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     plotlyOutput("plot1"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     footer = fluidRow(
       column(
         width = 6,
@@ -600,14 +633,18 @@ Box1<-
 # IBC-Br
 Box2<-
   boxPlus(
-    title = tags$b("IBC-Br Indice de Atividade Economica", style = 'font-family: "Georgia"'),
+    title = tags$b("IBC-Br", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Índice de Atividade Econômica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Índice mensal observado e dessazonalizado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     plotlyOutput("plot2"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     footer = fluidRow(
       column(
         width = 6,
@@ -637,17 +674,132 @@ Box2<-
     )
   )
 
+# Varejo e Serviços BR
+Box21<-
+  boxPlus(
+    title = tags$b("Varejo e Serviços", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb1,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Índice mensal de varejo e serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Volume de vendas no varejo e receita nominal de serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    plotlyOutput("plot21"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = fluidRow(
+      column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(Varejo$value,1), tail(months(Varejo$date),1)), 
+          text = "Varejo", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      ), column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(Servicos$value,1), tail(months(Servicos$date),1)), 
+          text = "Serviços", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Exportações
+Box22<-
+  boxPlus(
+    title = tags$b("Exportação de Bens", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb1,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Exportações", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em US$ bilhões, balanço de pagamentos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    plotlyOutput("plot22"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste("US$",round(
+            (tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1))/1000, 2), "bi"), 
+          number_color = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste("US$",round(tail(ExpBR$value/1000,1),1), "bi", tail(months(ExpBR$date),1)), 
+          text = "Exportações", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Variação PIB ES
+Box23<-
+  boxPlus(
+    title = tags$b("Produto Interno Bruto ES", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb2,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Crescimento do PIB ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Variação % anual real", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    plotlyOutput("plot23"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("O crescimento de 4.1% indica forte retomada da economia capixaba, que vinha de dois anos de uma recessão pior do que a apresentada em 2009 após a crise do subprime.", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(datag4$y,1), 2), "%"), 
+          number_color = if(tail(datag4$y,1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(datag4$y,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = NULL, 
+          text = "var. % PIB", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
 # PIB ES
 Box3<-
   boxPlus(
     title = tags$b("Produto Interno Bruto ES", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Crescimento do PIB ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em R$, valores observados a preço de mercado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     plotlyOutput("plot3"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("A economia capixaba fechou 2017 em patamar pré-2012.", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     footer = fluidRow(
       column(
         width = 12,
@@ -670,12 +822,16 @@ Box4<-
   boxPlus(
     title = tags$b("Indice de Atividade Economica Regional ES", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Índice de Atividade Econômica ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Índice mensal observado e dessazonalizado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     plotlyOutput("plot4"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     footer = fluidRow(
       column(
         width = 6,
@@ -705,17 +861,329 @@ Box4<-
     )
   )
 
+# Varejo e Serviços ES
+Box13<-
+  boxPlus(
+    title = tags$b("Varejo e Serviços ES", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb2,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Índice mensal de varejo e serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Volume de vendas no varejo e receita nominal de serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    plotlyOutput("plot13"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(VarejoES$value,1), tail(months(VarejoES$date),1)), 
+          text = "Varejo ES", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      ), column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(ServicosES$value,1), tail(months(ServicosES$date),1)), 
+          text = "Serviços ES", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Exportações ES
+Box18<-
+  boxPlus(
+    title = tags$b("Exportações ES", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb2,
+    status = "warning", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Exportações",style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em US$ milhões",style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot18"),
+    tags$p("Fonte: MDIC", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste("US$",round(
+            (tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1))/1000, 2), "mi"), 
+          number_color = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste("US$",tail(ExpES$value/1000,1), "mi", tail(months(ExpES$date),1)), 
+          text = "Exportações", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Selic
+Box9<-
+  boxPlus(
+    title = tags$b("Juros", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb3,
+    status = "primary", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Taxa básica Selic", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Taxa ao ano, diária, anualizada, base 252", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot9"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(Selic$value,1)-head(tail(Selic$value, 2), 1), 2), "%"), 
+          number_color = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(Selic$value,1), "%", tail(months(Selic$date),1)), 
+          text = "Selic", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Dólar
+Box19<-
+  boxPlus(
+    title = tags$b("Taxa de Câmbio", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb3,
+    status = "primary", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Dólar", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Preço de compra, cotação diária", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot19"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste('R$',round(
+            tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1), 2), "/US$"), 
+          number_color = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste('R$',round(tail(Dolar$value,1),2), "/US$",tail(months(Dolar$date),1)), 
+          text = "Dolar", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Mercado de Trabalho
+Box10<-
+  boxPlus(
+    title = tags$b("Mercado de Trabalho", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb3,
+    status = "primary", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Taxa de desemprego", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Percentual da população economicamente ativa, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot10"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1), 2), "%"), 
+          number_color = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(Desemprego$value,1), "%", tail(months(Desemprego$date),1)), 
+          text = "Desemprego", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Emprego ES
+Box16<-
+  boxPlus(
+    title = tags$b("Mercado de Trabalho ES", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb3,
+    status = "primary", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Taxa de Ocupação", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Índice, população economciamente ativa, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot16"),
+    tags$p("Fonte: MTE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1), 2), "pts."), 
+          number_color = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(EmpregoES$value,1), "pts.", tail(months(EmpregoES$date),1)), 
+          text = "Emprego Formal ES", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
+# Inflação
+Box7<-
+  boxPlus(
+    title = tags$b("Inflação", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb4,
+    status = "danger", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Índices de preços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Variação percentual, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot7"),
+    tags$p("Fonte: IBGE, FGV e DIEESE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(IPCA$value,1), tail(months(IPCA$date),1)), 
+          text = "IPCA", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      ), column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(IGPM$value,1), tail(months(IGPM$date),1)), 
+          text = "IGPM", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+      ),
+    fluidRow(
+      column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(IPCBr$value,1), tail(months(IPCBr$date),1)), 
+          text = "IPCBr", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      ), column(
+        width = 6,
+        descriptionBlock(
+          number = paste(round(
+            tail(ICV$value,1)-head(tail(ICV$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(ICV$value,1), tail(months(ICV$date),1)), 
+          text = "ICV", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+ 
+# Cesta Básica Vitória
+Box17<-
+  boxPlus(
+    title = tags$b("Cesta Básica", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    height = hb4,
+    status = "danger", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Custo da Cesta Básica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vitória-ES, índice, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot17"),
+    tags$p("Fonte: DIEESE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
+    footer = fluidRow(
+      column(
+        width = 12,
+        descriptionBlock(
+          number = paste(round(
+            tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1), 2), "pts."), 
+          number_color = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          number_icon = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(CestaVix$value,1), "pts.", tail(months(CestaVix$date),1)), 
+          text = "Cesta Básica", 
+          right_border = TRUE,
+          margin_bottom = FALSE
+        )
+      )
+    )
+  )
+
 # Consumo das Famílias
 Box5<-
   boxPlus(
     title = tags$b("Consumo das Famílias", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb5,
     status = "primary", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Contribuição do consumo privado no PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Índice, trimestral", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot5"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
         width = 6,
@@ -745,121 +1213,21 @@ Box5<-
     )
   )
 
-# Pesquisa Condições de Crédito
-Box6<-
-  boxPlus(
-    title = tags$b("Condições de Crédito", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "success", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot6"),
-    footer = fluidRow(
-      column(
-        width = 6,
-        descriptionBlock(
-          number = paste(round(
-            tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(CreditoR$value,1), tail(months(CreditoR$date),1)), 
-          text = "Demanda de Crédito", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      ), column(
-        width = 6,
-        descriptionBlock(
-          number = paste(round(
-            tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(OfertaR$value,1), tail(months(OfertaR$date),1)), 
-          text = "Oferta de Crédito", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
-# Inflação
-Box7<-
-  boxPlus(
-    title = tags$b("Inflação", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "danger", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot7"),
-    footer = fluidRow(
-      column(
-        width = 3,
-        descriptionBlock(
-          number = paste(round(
-            tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(IPCA$value,1), tail(months(IPCA$date),1)), 
-          text = "IPCA", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      ), column(
-        width = 3,
-        descriptionBlock(
-          number = paste(round(
-            tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(IGPM$value,1), tail(months(IGPM$date),1)), 
-          text = "IGPM", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      ), column(
-          width = 3,
-          descriptionBlock(
-            number = paste(round(
-              tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1), 2), "pts"), 
-            number_color = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"red"} else {"green"}, 
-            number_icon = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-            header = paste(tail(IPCBr$value,1), tail(months(IPCBr$date),1)), 
-            text = "IPCBr", 
-            right_border = TRUE,
-            margin_bottom = FALSE
-          )
-      ), column(
-        width = 3,
-        descriptionBlock(
-          number = paste(round(
-            tail(ICV$value,1)-head(tail(ICV$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(ICV$value,1), tail(months(ICV$date),1)), 
-          text = "ICV", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
 # Renda Média
 Box8<-
   boxPlus(
     title = tags$b("Renda Média", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb5,
     status = "primary", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Renda média real das pessoas ocupadas", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em R$, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot8"),
+    tags$p("Fonte: IBGE", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
         width = 6,
@@ -889,55 +1257,43 @@ Box8<-
     )
   )
 
-# Selic
-Box9<-
+# Pesquisa Condições de Crédito
+Box6<-
   boxPlus(
-    title = tags$b("Taxa Básica Selic", style = 'font-family: "Georgia"'),
+    title = tags$b("Expectativas", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
-    status = "primary", 
+    width = lb,
+    height = hb6,
+    status = "success", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
-    plotlyOutput("plot9"),
+    tags$b("Pesquisa de Condições de Crédito", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em pontos, trimestral", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
+    plotlyOutput("plot6"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
-        width = 12,
+        width = 6,
         descriptionBlock(
           number = paste(round(
-            tail(Selic$value,1)-head(tail(Selic$value, 2), 1), 2), "%"), 
-          number_color = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(Selic$value,1), "%", tail(months(Selic$date),1)), 
-          text = "Selic", 
+            tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(CreditoR$value,1), tail(months(CreditoR$date),1)), 
+          text = "Demanda de Crédito", 
           right_border = TRUE,
           margin_bottom = FALSE
         )
-      )
-    )
-  )
-
-# Mercado de Trabalho
-Box10<-
-  boxPlus(
-    title = tags$b("Desemprego", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "primary", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot10"),
-    footer = fluidRow(
-      column(
-        width = 12,
+      ), column(
+        width = 6,
         descriptionBlock(
           number = paste(round(
-            tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1), 2), "%"), 
-          number_color = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(Desemprego$value,1), "%", tail(months(Desemprego$date),1)), 
-          text = "Desemprego", 
+            tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1), 2), "pts"), 
+          number_color = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          number_icon = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          header = paste(tail(OfertaR$value,1), tail(months(OfertaR$date),1)), 
+          text = "Oferta de Crédito", 
           right_border = TRUE,
           margin_bottom = FALSE
         )
@@ -948,14 +1304,18 @@ Box10<-
 # Endividamento das Famílias
 Box11<-
   boxPlus(
-    title = tags$b("Endividamento das Famílias", style = 'font-family: "Georgia"'),
+    title = tags$b("Endividamento", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb6,
     status = "success", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Nível de endividamento das famílias", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Percentual da renda familiar, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot11"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
         width = 6,
@@ -990,15 +1350,19 @@ Box12<-
   boxPlus(
     title = tags$b("Inadimplência", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb6,
     status = "success", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Índice de Inadimplência Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Percentual sobre saldo de créditos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot12"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
-        width = 4,
+        width = 12,
         descriptionBlock(
           number = paste(round(
             tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1), 2), "%"), 
@@ -1009,8 +1373,11 @@ Box12<-
           right_border = TRUE,
           margin_bottom = FALSE
         )
-      ), column(
-        width = 4,
+      )
+      ),
+    fluidRow(
+      column(
+        width = 6,
         descriptionBlock(
           number = paste(round(
             tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1), 2), "%"), 
@@ -1023,7 +1390,7 @@ Box12<-
         )
       ),
       column(
-        width = 4,
+        width = 6,
         descriptionBlock(
           number = paste(round(
             tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1), 2), "%"), 
@@ -1038,60 +1405,24 @@ Box12<-
     )
   )
 
-# Varejo e Serviços ES
-Box13<-
-  boxPlus(
-    title = tags$b("Varejo e Serviços ES", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "warning", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot13"),
-    footer = fluidRow(
-      column(
-        width = 6,
-        descriptionBlock(
-          number = paste(round(
-            tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(VarejoES$value,1), tail(months(VarejoES$date),1)), 
-          text = "Varejo ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      ), column(
-        width = 6,
-        descriptionBlock(
-          number = paste(round(
-            tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(ServicosES$value,1), tail(months(ServicosES$date),1)), 
-          text = "Serviços ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
 # Inadimplência ES
 Box14<-
   boxPlus(
-    title = tags$b("Inadimplência ES", style = 'font-family: "Georgia"'),
+    title = tags$b("Inadimplência", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb6,
     status = "success", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Índice de Inadimplência ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Percentual sobre saldo de créditos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot14"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
-        width = 4,
+        width = 12,
         descriptionBlock(
           number = paste(round(
             tail(InadES$value,1)-head(tail(InadES$value, 2), 1), 2), "%"), 
@@ -1102,8 +1433,11 @@ Box14<-
           right_border = TRUE,
           margin_bottom = FALSE
         )
-      ), column(
-        width = 4,
+      )
+      ),
+    fluidRow(
+      column(
+        width = 6,
         descriptionBlock(
           number = paste(round(
             tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1), 2), "%"), 
@@ -1116,7 +1450,7 @@ Box14<-
         )
       ),
       column(
-        width = 4,
+        width = 6,
         descriptionBlock(
           number = paste(round(
             tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1), 2), "%"), 
@@ -1134,14 +1468,18 @@ Box14<-
 # Saldo Recursos Livres ES
 Box15<-
   boxPlus(
-    title = tags$b("Saldo Recursos Livres ES", style = 'font-family: "Georgia"'),
+    title = tags$b("Crédito", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = 4,
+    width = lb,
+    height = hb6,
     status = "success", 
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
+    tags$b("Volume de recursos livres no ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Em R$ bilhões, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
     plotlyOutput("plot15"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080;'),
     footer = fluidRow(
       column(
         width = 6,
@@ -1170,118 +1508,6 @@ Box15<-
       )
     )
   )
-
-# Emprego ES
-Box16<-
-  boxPlus(
-    title = tags$b("Emprego Formal ES", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "primary", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot16"),
-    footer = fluidRow(
-      column(
-        width = 12,
-        descriptionBlock(
-          number = paste(round(
-            tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1), 2), "pts."), 
-          number_color = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(EmpregoES$value,1), "pts.", tail(months(EmpregoES$date),1)), 
-          text = "Emprego Formal ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
-# Cesta Básica Vitória
-Box17<-
-  boxPlus(
-    title = tags$b("Custo Cesta Básica Vitória", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "danger", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot17"),
-    footer = fluidRow(
-      column(
-        width = 12,
-        descriptionBlock(
-          number = paste(round(
-            tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1), 2), "pts."), 
-          number_color = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste(tail(CestaVix$value,1), "pts.", tail(months(CestaVix$date),1)), 
-          text = "Cesta Básica", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
-# Exportações ES
-Box18<-
-  boxPlus(
-    title = tags$b("Exportações ES", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "warning", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot18"),
-    footer = fluidRow(
-      column(
-        width = 12,
-        descriptionBlock(
-          number = paste("US$",round(
-            (tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1))/1000, 2), "mi"), 
-          number_color = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste("US$",tail(ExpES$value,1)/1000, "mi", tail(months(ExpES$date),1)), 
-          text = "ExpES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )
-
-# Dólar
-Box19<-
-  boxPlus(
-    title = tags$b("Taxa de Câmbio - Dólar", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = 4,
-    status = "primary", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    plotlyOutput("plot19"),
-    footer = fluidRow(
-      column(
-        width = 12,
-        descriptionBlock(
-          number = paste('R$',round(
-            tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1), 2), "/US$"), 
-          number_color = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
-          header = paste('R$',round(tail(Dolar$value,1),2), "/US$",tail(months(Dolar$date),1)), 
-          text = "Dolar", 
-          right_border = TRUE,
-          margin_bottom = FALSE
-        )
-      )
-    )
-  )      
 
 ## User Interface ##
 header <- dashboardHeaderPlus(title = "MONITOR", titleWidth = 150)
@@ -1355,11 +1581,15 @@ body <- dashboardBody(
                    ),
             fluidRow(
               r1, # Resenha BR
+              Box20, # variação Anual
               Box1, # PIB
-              Box2 # IBC-Br
+              Box2, # IBC-Br
+              Box21, # Varejo e Serviços
+              Box22 # Exportações
               ),
             fluidRow(
               r2, # Resenha ES
+              Box23, # Variação Anual ES
               Box3, # PIB ES
               Box4, # IAERES
               Box13, # Varejo e Serviços ES
@@ -1421,6 +1651,10 @@ server <- function(input, output) {
   output$plot17<-renderPlotly({g17})
   output$plot18<-renderPlotly({g18})
   output$plot19<-renderPlotly({g19})
+  output$plot20<-renderPlotly({g20})
+  output$plot21<-renderPlotly({g21})
+  output$plot22<-renderPlotly({g22})
+  output$plot23<-renderPlotly({g23})
 }
 
 ## App ##
