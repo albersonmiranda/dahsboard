@@ -72,10 +72,11 @@ ICV<-read.xlsx('Series.xlsx', sheet = 17); ICV$date<-convertToDate(ICV$date)
 CestaVix<-read.xlsx('Series.xlsx', sheet = 38); CestaVix$date<-convertToDate(CestaVix$date)
 
 lb<- 4 # Largura Boxes
+# Altura Boxes
 hb1<-760 # Atividade econômica
 hb2<-760 # Atividade econômica ES
 hb3<-700 # Mercados
-hb4<-852 # Inflação
+hb4<-855 # Inflação
 hb5<-760 # Consumo
 hb6<-800 # Crédito
 
