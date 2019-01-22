@@ -13,8 +13,8 @@ library(openxlsx)
 
 ## Series ##
 
-#BETSsearch(view = TRUE,lang = "pt", description = "desocu") #,src = "FGV", unit = "%", periodicity = "T")
-#serie<-BETSsearch(view = FALSE,lang = "pt", description = "inadimplencia")
+#BETSsearch(view = TRUE,lang = "pt", description = "produto interno bruto",src = "IBGE", unit = "%", periodicity = "T")
+#serie<-BETSsearch(view = FALSE,lang = "pt", description = "produto interno bruto")
 #write.xlsx(serie, "serie.xlsx")
 
 # Brasil #
@@ -22,6 +22,8 @@ PIBT<-BETSget(22099, data.frame = TRUE, from = "1996-01-01") # PIB trimestral - 
 PIBTs<-BETSget(22109, data.frame = TRUE, from = "1996-01-01") # PIB trimestral - Dados dessazonalizados - Produto Interno Bruto a precos de mercado
 IBCBr<-BETSget(24363, data.frame = TRUE)
 IBCBrs<-BETSget(24364, data.frame = TRUE) # Com ajuste sazonal
+
+PIBVA<-BETSget(7326, data.frame = TRUE) # Variação anual
 
 Consumo<-BETSget(22100, data.frame = TRUE, from = "1996-01-01") #	PIB trimestral Indice 1995=100 Consumo das famílias
 Consumos<-BETSget(22110, data.frame = TRUE, from = "1996-01-01") #	PIB trimestral Indice 1995=100 Consumo das famílias
@@ -116,6 +118,7 @@ addWorksheet(Series, "InadPFES")
 addWorksheet(Series, "InadPJES")
 addWorksheet(Series, "ExpES")
 addWorksheet(Series, "CestaVix")
+addWorksheet(Series, "PIBVA")
 
 
 writeData(Series, "PIBT", PIBT)
@@ -156,5 +159,6 @@ writeData(Series, "InadPFES", InadPFES)
 writeData(Series, "InadPJES", InadPJES)
 writeData(Series, "ExpES", ExpES)
 writeData(Series, "CestaVix", CestaVix)
+writeData(Series, "PIBVA", PIBVA)
 
 saveWorkbook(Series, "Series.xlsx", overwrite = TRUE)
