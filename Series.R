@@ -2,13 +2,7 @@
 options("scipen"=20)
 
 ## Pacotes ##
-library(shiny)
-library(shinydashboard)
-library(shinydashboardPlus)
-library(shinyWidgets)
 library(BETS)
-library(plotly)
-library(ggplot2)
 library(openxlsx)
 
 ## Series ##
@@ -17,13 +11,18 @@ library(openxlsx)
 #serie<-BETSsearch(view = FALSE,lang = "pt", description = "produto interno bruto")
 #write.xlsx(serie, "serie.xlsx")
 
+# Setor publico: Dívida Pública BR e ES
+# Rendimento de Títulos públicos em Mercados
+
 # Brasil #
 PIBT<-BETSget(22099, data.frame = TRUE, from = "1996-01-01") # PIB trimestral - Dados observados - Produto Interno Bruto a precos de mercado
 PIBTs<-BETSget(22109, data.frame = TRUE, from = "1996-01-01") # PIB trimestral - Dados dessazonalizados - Produto Interno Bruto a precos de mercado
 IBCBr<-BETSget(24363, data.frame = TRUE)
 IBCBrs<-BETSget(24364, data.frame = TRUE) # Com ajuste sazonal
-
 PIBVA<-BETSget(7326, data.frame = TRUE) # Variação anual
+Varejo<-BETSget(1455, data.frame = TRUE, from = "2012-01-01") # Indice volume de vendas no varejo
+Servicos<-BETSget(21637, data.frame = TRUE) # Indice Receita nominal de serviços
+ExpBR<-BETSget(22708, data.frame = TRUE) # Exportação de Bens Free on Board
 
 Consumo<-BETSget(22100, data.frame = TRUE, from = "1996-01-01") #	PIB trimestral Indice 1995=100 Consumo das famílias
 Consumos<-BETSget(22110, data.frame = TRUE, from = "1996-01-01") #	PIB trimestral Indice 1995=100 Consumo das famílias
@@ -119,6 +118,9 @@ addWorksheet(Series, "InadPJES")
 addWorksheet(Series, "ExpES")
 addWorksheet(Series, "CestaVix")
 addWorksheet(Series, "PIBVA")
+addWorksheet(Series, "Varejo")
+addWorksheet(Series, "Servicos")
+addWorksheet(Series, "ExpBR")
 
 
 writeData(Series, "PIBT", PIBT)
@@ -160,5 +162,8 @@ writeData(Series, "InadPJES", InadPJES)
 writeData(Series, "ExpES", ExpES)
 writeData(Series, "CestaVix", CestaVix)
 writeData(Series, "PIBVA", PIBVA)
+writeData(Series, "Varejo", Varejo)
+writeData(Series, "Servicos", Servicos)
+writeData(Series, "ExpBR", ExpBR)
 
 saveWorkbook(Series, "Series.xlsx", overwrite = TRUE)
