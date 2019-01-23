@@ -101,11 +101,11 @@ r1<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA", style = 'font-family: "Georgi
             collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
-              "A atividade economica brasileira iniciou o ultimo trimestre do ano praticamente estagnada, mantendo o ritmo paulatino e moroso que vem marcando 2018, porem com um resultado melhor do que o esperado.",
-              br(),br(),
-              "O indice de Atividade Economica do Banco Central (IBC-Br) que, com cautela, pode ser utilizado como sinalizador do Produto Interno Bruto (PIB), apresentou avanco de 0,02 por cento em outubro na comparacao com o mes anterior, de acordo com dado dessazonalizado divulgado BC.",
-              br(),br(),
-              "O desempenho foi melhor que a expectativa em pesquisa da Reuters de contracao de 0,20 por cento, representando o quinto resultado positivo no ano."
+               "A atividade economica brasileira iniciou o ultimo trimestre do ano praticamente estagnada, mantendo o ritmo paulatino e moroso que vem marcando 2018, porem com um resultado melhor do que o esperado.",
+               br(),br(),
+               "O indice de Atividade Economica do Banco Central (IBC-Br) que, com cautela, pode ser utilizado como sinalizador do Produto Interno Bruto (PIB), apresentou avanco de 0,02 por cento em outubro na comparacao com o mes anterior, de acordo com dado dessazonalizado divulgado BC.",
+               br(),br(),
+               "O desempenho foi melhor que a expectativa em pesquisa da Reuters de contracao de 0,20 por cento, representando o quinto resultado positivo no ano."
             )
 )
 
@@ -134,7 +134,7 @@ r3<-boxPlus(title = tags$b("CONSUMO", style = 'font-family: "Georgia"'),
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "Um dos principais motores da economia, o consumo das famílias reduziu seu ritmo de crescimento no 2T de 2018, divulgou o IBGE. Apesar da alta de 1,7% no trimestre, se comparado ao mesmo período de 2017, houve crescimento de apenas 0,1% em relção ao semestre anterior. Contribuem para esse cenário o aumento da informalidade no mercado de trabalho e estagnação da renda."
-               ),
+            ),
             br()
 )
 
@@ -203,7 +203,7 @@ Boxu<-widgetUserBox(
     socialButton(
       url = "https://github.com/albersonmiranda",
       type = "github"
-      ),
+    ),
     socialButton(
       url = "https://www.facebook.com/alberson.miranda",
       type = "facebook"
@@ -215,7 +215,7 @@ Boxu<-widgetUserBox(
     socialButton(
       url = "https://www.linkedin.com/in/albersonmiranda/",
       type = "linkedin"
-  )
+    )
   ),
   collapsible = FALSE,
   closable = FALSE
@@ -243,21 +243,21 @@ g1 <- plot_ly(data = datag1, x=~x, y=~y1,
 
 # IBC-Br
 datag2 = data.frame(x = IBCBr$date,
-                  y1 = IBCBr$value,
-                  y2 = IBCBrs$value
-                  )
+                    y1 = IBCBr$value,
+                    y2 = IBCBrs$value
+)
 g2 <- plot_ly(data = datag2, x=~x, y=~y1,
               type = "scatter", mode="lines", name = "IBC-Br"
 ) %>%
-add_trace(y = ~y2, name = 'IBC-Br Dessazonalizado',mode = 'lines'
-) %>%
-layout(title = "", xaxis = list(title = ""), yaxis = list(title = "IBC-Br"),
-       shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
-                     x0 = "2014", x1 = "2017", xref = "x",
-                     y0 = 95, y1 = 153, yref = "y"),
-       legend = list(orientation = 'h',
-                     x = 0.5,
-                     xanchor = "center")
+  add_trace(y = ~y2, name = 'IBC-Br Dessazonalizado',mode = 'lines'
+  ) %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "IBC-Br"),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = 95, y1 = 153, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
   )
 
 
@@ -265,7 +265,7 @@ layout(title = "", xaxis = list(title = ""), yaxis = list(title = "IBC-Br"),
 # PIB ES
 PIBES<-data.frame(date="2017-01-01",
                   value=113700000000
-                  )
+)
 
 datag3 = rbind(PIBES1[1:15,], PIBES2, PIBES)
 names(datag3) = c("x", "y")
@@ -337,16 +337,16 @@ g6 <- plot_ly(data = CreditoE, x=~date, y=~value,
 # Inflação
 g7<- plot_ly(data = IPCA, x=~date, y=~value,
              type = "scatter", mode = "lines", name = "IPCA") %>%
-        add_trace(IGPM, x=IGPM$date, y=IGPM$value, name = "IGPM", mode = "lines") %>%
-        add_trace(IPCBr, x=IPCBr$date, y=IPCBr$value, name = "IPCBr", mode = "lines") %>%
-        add_trace(ICV, x=ICV$date, y=ICV$value, name = "ICV", mode = "lines") %>%
-        layout(title = "", xaxis = list(title = ""), yaxis = list(title = 'Variação %'),
-               shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
-                             x0 = "2014", x1 = "2017", xref = "x",
-                             y0 = -1, y1 = 5, yref = "y"),
-               legend = list(orientation = 'h',
-                             x = 0.5,
-                             xanchor = "center")
+  add_trace(IGPM, x=IGPM$date, y=IGPM$value, name = "IGPM", mode = "lines") %>%
+  add_trace(IPCBr, x=IPCBr$date, y=IPCBr$value, name = "IPCBr", mode = "lines") %>%
+  add_trace(ICV, x=ICV$date, y=ICV$value, name = "ICV", mode = "lines") %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = 'Variação %'),
+         shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
+                       x0 = "2014", x1 = "2017", xref = "x",
+                       y0 = -1, y1 = 5, yref = "y"),
+         legend = list(orientation = 'h',
+                       x = 0.5,
+                       xanchor = "center")
   )
 
 # Renda Média
@@ -376,8 +376,8 @@ g9<- plot_ly(data = Selic, x=~date, y=~value,
 
 # Desemprego
 g10<- plot_ly(data = Desemprego, x=~date, y=~value,
-             type = "scatter", mode = "lines", name = "Desemprego") %>%
-   layout(title = "", xaxis = list(title = ""), yaxis = list(title = "%"),
+              type = "scatter", mode = "lines", name = "Desemprego") %>%
+  layout(title = "", xaxis = list(title = ""), yaxis = list(title = "%"),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                        x0 = "2014", x1 = "2017", xref = "x",
                        y0 = 6, y1 = 14, yref = "y"),
@@ -491,7 +491,7 @@ g18<- plot_ly(data = ExpES, x=~date, y=~value/1000,
 
 # Dólar
 g19<- plot_ly(data = Dolar, x=~date, y=~value,
-             type = 'scatter', mode = 'lines', name = "Dólar") %>%
+              type = 'scatter', mode = 'lines', name = "Dólar") %>%
   layout(title = "", xaxis = list(title = ""), yaxis = list(title = "R$/US$"),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
                        x0 = "2014", x1 = "2017", xref = "x",
@@ -503,7 +503,7 @@ g19<- plot_ly(data = Dolar, x=~date, y=~value,
 
 # PIB Variação Anual
 g20 <- plot_ly(data = PIBVA, x=~date, y=~value,
-              type = "bar", name = "PIB Anual"
+               type = "bar", name = "PIB Anual"
 ) %>%
   layout(title = "", xaxis = list(title = ""), yaxis = list(title = "Variação %"),
          shapes = list(type = "rect", fillcolor = "red", line = list(color = "red"), opacity = 0.3,
@@ -1128,7 +1128,7 @@ Box7<-
           margin_bottom = FALSE
         )
       )
-      ),
+    ),
     fluidRow(
       column(
         width = 6,
@@ -1157,7 +1157,7 @@ Box7<-
       )
     )
   )
- 
+
 # Cesta Básica Vitória
 Box17<-
   boxPlus(
@@ -1395,7 +1395,7 @@ Box12<-
           margin_bottom = FALSE
         )
       )
-      ),
+    ),
     fluidRow(
       column(
         width = 6,
@@ -1455,7 +1455,7 @@ Box14<-
           margin_bottom = FALSE
         )
       )
-      ),
+    ),
     fluidRow(
       column(
         width = 6,
@@ -1531,7 +1531,7 @@ Box15<-
   )
 
 # Mapa da Inadimplência
-Box24<-
+Boxm1<-
   boxPlus(
     title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
     closable = FALSE, 
@@ -1540,8 +1540,8 @@ Box24<-
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
-    tags$b("Inadimplência Total", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    tags$b("Inadimplência", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias, pessoas físicas e jurídicas, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     leafletOutput("m1"),
     tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -1549,7 +1549,7 @@ Box24<-
   )
 
 # Mapa da Inadimplência PF
-Box25<-
+Boxm2<-
   boxPlus(
     title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
     closable = FALSE, 
@@ -1558,8 +1558,8 @@ Box25<-
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
-    tags$b("Inadimplência PF", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    tags$b("Inadimplência pessoa física", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     leafletOutput("m2"),
     tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -1567,7 +1567,7 @@ Box25<-
   )
 
 # Mapa da Inadimplência PJ
-Box26<-
+Boxm3<-
   boxPlus(
     title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
     closable = FALSE, 
@@ -1576,8 +1576,8 @@ Box26<-
     solidHeader = TRUE, 
     collapsible = TRUE,
     enable_dropdown = FALSE,
-    tags$b("Inadimplência PJ", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    tags$b("Inadimplência pessoa jurídica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     leafletOutput("m3"),
     tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -1588,10 +1588,10 @@ Box26<-
 header <- dashboardHeaderPlus(title = "MONITOR", titleWidth = 150)
 
 sidebar <- dashboardSidebar(width = 150,
-  sidebarMenu(
-    menuItem("Conjuntura", tabName = "conjuntura", icon = icon("chart-bar")),
-    menuItem("Mapa", tabName = "mapa", icon = icon("globe-americas"))
-  )
+                            sidebarMenu(
+                              menuItem("Conjuntura", tabName = "conjuntura", icon = icon("chart-bar")),
+                              menuItem("Mapas", tabName = "mapas", icon = icon("globe-americas"))
+                            )
 )
 
 body <- dashboardBody(
@@ -1650,11 +1650,11 @@ body <- dashboardBody(
                             background-color: #fff1e0
                             }
                             '))),
-    tabItems(
+  tabItems(
     tabItem(tabName = "conjuntura",
             column(8, align = "center", offset = 2,
                    BoxT1 # Titulo
-                   ),
+            ),
             fluidRow(
               r1, # Resenha BR
               Box20, # variação Anual
@@ -1662,7 +1662,7 @@ body <- dashboardBody(
               Box2, # IBC-Br
               Box21, # Varejo e Serviços
               Box22 # Exportações
-              ),
+            ),
             fluidRow(
               r2, # Resenha ES
               Box23, # Variação Anual ES
@@ -1700,27 +1700,27 @@ body <- dashboardBody(
                    Boxu # Apresentacao
             )
     ),
-    tabItem(tabName = "mapa",
+    tabItem(tabName = "mapas",
             column(8, align = "center", offset = 2,
                    BoxT2 # Titulo
             ),
             fluidRow(
-              Box24, # Resenha BR
-              Box25, # variação Anual
-              Box26 # PIB
+              Boxm1, # Inadimplência
+              Boxm2, # Inadimplência PF
+              Boxm3 # Inadimplência PJ
             ),
             column(4, align = "center", offset = 4,
                    Boxu # Apresentacao
             )
     )
   )
-)
+  )
 
 ui<-dashboardPagePlus(header, sidebar, body)
 
 ## Server ##
 server <- function(input, output) {
-
+  
   output$plot1<-renderPlotly({g1})
   output$plot2<-renderPlotly({g2})
   output$plot3<-renderPlotly({g3})
@@ -1745,7 +1745,7 @@ server <- function(input, output) {
   output$plot22<-renderPlotly({g22})
   output$plot23<-renderPlotly({g23})
   
-    output$m1<-renderLeaflet({
+  output$m1<-renderLeaflet({
     tmap_mode("view")
     InadEST<-inner_join(Estados, InadEST, by = c("NM_ESTADO" = "Estados"))
     InadEST<-InadEST[, c(3,1,2,4,5,6)]
