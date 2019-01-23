@@ -6,10 +6,14 @@ library(shiny)
 library(shinydashboard)
 library(shinydashboardPlus)
 library(shinyWidgets)
-library(BETS)
 library(plotly)
 library(ggplot2)
 library(openxlsx)
+library(sf)
+library(tmap)
+library(dplyr)
+library(leaflet)
+
 
 ## Series ##
 
@@ -71,6 +75,11 @@ IPCBr<-read.xlsx('Series.xlsx', sheet = 16); IPCBr$date<-convertToDate(IPCBr$dat
 ICV<-read.xlsx('Series.xlsx', sheet = 17); ICV$date<-convertToDate(ICV$date)
 CestaVix<-read.xlsx('Series.xlsx', sheet = 38); CestaVix$date<-convertToDate(CestaVix$date)
 
+# Inadimplência por Estado
+InadEST<-read.xlsx('Series.xlsx', sheet = 43)
+InadESTPF<-read.xlsx('Series.xlsx', sheet = 44)
+InadESTPJ<-read.xlsx('Series.xlsx', sheet = 45)
+
 lb<- 4 # Largura Boxes
 # Altura Boxes
 hb1<-760 # Atividade econômica
@@ -89,7 +98,7 @@ r1<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA", style = 'font-family: "Georgi
             status = NULL,
             background = "yellow",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
               "A atividade economica brasileira iniciou o ultimo trimestre do ano praticamente estagnada, mantendo o ritmo paulatino e moroso que vem marcando 2018, porem com um resultado melhor do que o esperado.",
@@ -107,7 +116,7 @@ r2<-boxPlus(title = tags$b("ATIVIDADE ECONÔMICA ES", style = 'font-family: "Geo
             status = NULL,
             background = "yellow",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "O Produto Interno Bruto (PIB) do Espírito Santo vem mantendo bom desempenho em 2018. Dados divulgados pelo Instituto Jones dos Santos Neves (IJSN) referentes ao terceiro trimestre de 2018 mostram que o ritmo de crescimento da economia capixaba neste ano avançou 2,3% no acumulado do ano em comparação ao mesmo período do ano anterior. O número representa mais que o dobro do resultado nacional, que ficou em 1,1% na mesma base de comparação."),
@@ -121,7 +130,7 @@ r3<-boxPlus(title = tags$b("CONSUMO", style = 'font-family: "Georgia"'),
             status = NULL,
             background = "light-blue",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "Um dos principais motores da economia, o consumo das famílias reduziu seu ritmo de crescimento no 2T de 2018, divulgou o IBGE. Apesar da alta de 1,7% no trimestre, se comparado ao mesmo período de 2017, houve crescimento de apenas 0,1% em relção ao semestre anterior. Contribuem para esse cenário o aumento da informalidade no mercado de trabalho e estagnação da renda."
@@ -136,7 +145,7 @@ r4<-boxPlus(title = tags$b("INFLAÇÃO", style = 'font-family: "Georgia"'),
             status = NULL,
             background = "red",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "O Índice Nacional de Preços ao Consumidor Amplo (IPCA) teve queda de 0,21% em novembro, conforme divulgado pelo IBGE. O resultado foi o menor desde julho de 2017, quando houve queda de 0,23%. Entre os meses de novembro, a queda é a menor desde o início do Plano Real em 1994. Em 12 meses, a inflação acumula 4,05% enquanto a taxa acumulada de 2018 é de 3,59%.",
@@ -154,7 +163,7 @@ r5<-boxPlus(title = tags$b("MERCADOS", style = 'font-family: "Georgia"'),
             status = NULL,
             background = "light-blue",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "Para 2019, é esperado um aumento dos juros, motivado por uma provável recuperação da economia. Na média, os analistas do mercado financeiro esperam que a Selic feche o próximo ano em 7,5%.",
@@ -170,7 +179,7 @@ r6<-boxPlus(title = tags$b("CRÉDITO", style = 'font-family: "Georgia"'),
             status = NULL,
             background = "green",
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             enable_dropdown = FALSE,
             h4(style = 'text-align: justify; font-family: "Georgia";',
                "A lenta retomada da economia e o mercado de trabalho fragilizado continuam contribuindo para desaceleração do consumo e, consequentemente, da demanda por crédito. Embora em crescimento, a demanda por crédito foi bem aquém do projetado para o trimestre, conforme a Pesquisa Trimestral de Condições de Crédito do Departamento de Estudos e Pesquisas do Banco Central, frustando as expectativas do mercado de crédito pelo segundo trimestre consecutivo.",
@@ -545,12 +554,23 @@ g23 <- plot_ly(data = datag4, x=~x, y=~y,
                        xanchor = "center")
   )
 
+## Mapas ##
+
+# Estados
+Estados<-st_read("./Brasil/UFEBRASIL.shp", stringsAsFactors = FALSE)
+
 ## Body ##
 
 # Titulo
-Box0<-list(
-  h1(style = 'text-align: center; font-family: "Georgia"; ', "BR & ES: Indices e indicadores economicos"),
-  h3(style = 'text-align: center; font-family: "Georgia"; font-size: 20px;', "A visao geral sobre os principais dados e tendencias economicas do ES e do Brasil, incluindo PIB, inflacao, desemprego, indicadores de atividade e consumo, endividamento e inadimplencia"),
+BoxT1<-list(
+  h1(style = 'text-align: center; font-family: "Georgia"; ', "BR & ES: Índices e indicadores econômicos"),
+  h3(style = 'text-align: center; font-family: "Georgia"; font-size: 20px;', "A visão geral sobre os principais dados e tendências econômicas do ES e do Brasil, incluindo PIB, inflacão, desemprego, indicadores de atividade e consumo, endividamento e inadimplência"),
+  br()
+)
+
+BoxT2<-list(
+  h1(style = 'text-align: center; font-family: "Georgia"; ', "BR & ES: Atlas financeiro"),
+  h3(style = 'text-align: center; font-family: "Georgia"; font-size: 20px;', "A visão geral sobre os principais dados e tendências econômicas do ES e do Brasil, incluindo PIB, inflacão, desemprego, indicadores de atividade e consumo, endividamento e inadimplência, mapeados estado a estado."),
   br()
 )
 
@@ -563,7 +583,7 @@ Box20<-
     height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Crescimento do PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Variação % anual real", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -596,7 +616,7 @@ Box1<-
     height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Crescimento do PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Índice trimestral — valores observados a preço de mercado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -640,7 +660,7 @@ Box2<-
     height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice de Atividade Econômica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Índice mensal observado e dessazonalizado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -684,7 +704,7 @@ Box21<-
     height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice mensal de varejo e serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Volume de vendas no varejo e receita nominal de serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -729,7 +749,7 @@ Box22<-
     height = hb1,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Exportações", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em US$ bilhões, balanço de pagamentos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -761,7 +781,7 @@ Box23<-
     height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Crescimento do PIB ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Variação % anual real", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -794,7 +814,7 @@ Box3<-
     height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Crescimento do PIB ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em R$, valores observados a preço de mercado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -827,7 +847,7 @@ Box4<-
     height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice de Atividade Econômica ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Índice mensal observado e dessazonalizado", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -871,7 +891,7 @@ Box13<-
     height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice mensal de varejo e serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Volume de vendas no varejo e receita nominal de serviços", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
@@ -916,7 +936,7 @@ Box18<-
     height = hb2,
     status = "warning", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Exportações",style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em US$ milhões",style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -948,7 +968,7 @@ Box9<-
     height = hb3,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Taxa básica Selic", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Taxa ao ano, diária, anualizada, base 252", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -980,7 +1000,7 @@ Box19<-
     height = hb3,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Dólar", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Preço de compra, cotação diária", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1012,7 +1032,7 @@ Box10<-
     height = hb3,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Taxa de desemprego", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Percentual da população economicamente ativa, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1044,7 +1064,7 @@ Box16<-
     height = hb3,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Taxa de Ocupação", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Índice, população economciamente ativa, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1076,7 +1096,7 @@ Box7<-
     height = hb4,
     status = "danger", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índices de preços", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Variação percentual, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1147,7 +1167,7 @@ Box17<-
     height = hb4,
     status = "danger", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Custo da Cesta Básica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Vitória-ES, índice, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1179,7 +1199,7 @@ Box5<-
     height = hb5,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Contribuição do consumo privado no PIB", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Índice, trimestral", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1223,7 +1243,7 @@ Box8<-
     height = hb5,
     status = "primary", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Renda média real das pessoas ocupadas", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em R$, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1267,7 +1287,7 @@ Box6<-
     height = hb6,
     status = "success", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Pesquisa de Condições de Crédito", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em pontos, trimestral", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1311,7 +1331,7 @@ Box11<-
     height = hb6,
     status = "success", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Nível de endividamento das famílias", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Percentual da renda familiar, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1355,7 +1375,7 @@ Box12<-
     height = hb6,
     status = "success", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice de Inadimplência Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Percentual sobre saldo de créditos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1415,7 +1435,7 @@ Box14<-
     height = hb6,
     status = "success", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Índice de Inadimplência ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Percentual sobre saldo de créditos, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1475,7 +1495,7 @@ Box15<-
     height = hb6,
     status = "success", 
     solidHeader = TRUE, 
-    collapsible = TRUE,
+    collapsible = FALSE,
     enable_dropdown = FALSE,
     tags$b("Volume de recursos livres no ES", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
     tags$p("Em R$ bilhões, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080;'),
@@ -1510,12 +1530,67 @@ Box15<-
     )
   )
 
+# Mapa da Inadimplência
+Box24<-
+  boxPlus(
+    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    status = "danger", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Inadimplência Total", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    leafletOutput("m1"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = NULL
+  )
+
+# Mapa da Inadimplência PF
+Box25<-
+  boxPlus(
+    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    status = "danger", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Inadimplência PF", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    leafletOutput("m2"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = NULL
+  )
+
+# Mapa da Inadimplência PJ
+Box26<-
+  boxPlus(
+    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
+    closable = FALSE, 
+    width = lb,
+    status = "danger", 
+    solidHeader = TRUE, 
+    collapsible = TRUE,
+    enable_dropdown = FALSE,
+    tags$b("Inadimplência PJ", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("Vencimento superior a 90 dias", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    leafletOutput("m3"),
+    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    footer = NULL
+  )
+
 ## User Interface ##
 header <- dashboardHeaderPlus(title = "MONITOR", titleWidth = 150)
 
 sidebar <- dashboardSidebar(width = 150,
   sidebarMenu(
-    menuItem("Conjuntura", tabName = "conjuntura", icon = icon("globe-americas"))
+    menuItem("Conjuntura", tabName = "conjuntura", icon = icon("chart-bar")),
+    menuItem("Mapa", tabName = "mapa", icon = icon("globe-americas"))
   )
 )
 
@@ -1578,7 +1653,7 @@ body <- dashboardBody(
     tabItems(
     tabItem(tabName = "conjuntura",
             column(8, align = "center", offset = 2,
-                   Box0 # Titulo
+                   BoxT1 # Titulo
                    ),
             fluidRow(
               r1, # Resenha BR
@@ -1624,6 +1699,19 @@ body <- dashboardBody(
             column(4, align = "center", offset = 4,
                    Boxu # Apresentacao
             )
+    ),
+    tabItem(tabName = "mapa",
+            column(8, align = "center", offset = 2,
+                   BoxT2 # Titulo
+            ),
+            fluidRow(
+              Box24, # Resenha BR
+              Box25, # variação Anual
+              Box26 # PIB
+            ),
+            column(4, align = "center", offset = 4,
+                   Boxu # Apresentacao
+            )
     )
   )
 )
@@ -1656,6 +1744,27 @@ server <- function(input, output) {
   output$plot21<-renderPlotly({g21})
   output$plot22<-renderPlotly({g22})
   output$plot23<-renderPlotly({g23})
+  
+  output$m1<-renderLeaflet({
+    InadEST<-inner_join(Estados, InadEST, by = c("NM_ESTADO" = "Estados"))
+    InadEST<-InadEST[, c(3,1,2,4,5,6)]
+    m1<-tm_shape(InadEST, name = "Mapa da Inadimplência") +
+      tm_polygons("Inadimplencia", palette = "Reds", title = "")
+  })
+  
+  output$m2<-renderLeaflet({
+    InadESTPF<-inner_join(Estados, InadESTPF, by = c("NM_ESTADO" = "Estados"))
+    InadESTPF<-InadESTPF[, c(3,1,2,4,5,6)]
+    m2<-tm_shape(InadESTPF, name = "Mapa da Inadimplência") +
+      tm_polygons("Inadimplencia", palette = "Reds", title = "")
+  })
+  
+  output$m3<-renderLeaflet({
+    InadESTPJ<-inner_join(Estados, InadESTPJ, by = c("NM_ESTADO" = "Estados"))
+    InadESTPJ<-InadESTPJ[, c(3,1,2,4,5,6)]
+    m3<-tm_shape(InadESTPJ, name = "Mapa da Inadimplência") +
+      tm_polygons("Inadimplencia", palette = "Reds", title = "")
+  })
 }
 
 ## App ##
