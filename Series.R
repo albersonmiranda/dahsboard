@@ -69,6 +69,163 @@ InadPJES<-BETSget(15900, data.frame = TRUE)
 ExpES<-BETSget(13386, data.frame = TRUE) # exportação de bens milhares de US$
 CestaVix<-BETSget(7494, data.frame = TRUE) # Indice
 
+# Inadimplência #
+
+InadEST<-BETSget(
+  c(15925, 15926, 15927, 15928, 15929,
+    15930, 15931, 15932, 15933, 15934,
+    15935, 15936, 15937, 15938, 15939,
+    15940, 15941, 15942, 15943, 15944,
+    15945, 15946, 15947, 15948, 15949,
+    15950, 15951),
+  data.frame = TRUE)
+
+InadESTPF<-BETSget(
+  c(15861, 15862, 15863, 15864, 15865,
+    15866, 15867, 15868, 15869, 15870,
+    15871, 15872, 15873, 15874, 15875,
+    15876, 15877, 15878, 15879, 15880,
+    15881, 15882, 15883, 15884, 15885,
+    15886, 15887),
+  data.frame = TRUE)
+
+InadESTPJ<-BETSget(
+ c(15893, 15894, 15895, 15896, 15897,
+   15898, 15899, 15900, 15901, 15902,
+   15903, 15904, 15905, 15906, 15907,
+   15908, 15909, 15910, 15911, 15912,
+   15913, 15914, 15915, 15916, 15917,
+   15918, 15919),
+  data.frame = TRUE)
+
+Estados<-c("ACRE",
+           "ALAGOAS",
+           "AMAPÁ",
+           "AMAZONAS",
+           "BAHIA",
+           "CEARÁ",
+           "DISTRITO FEDERAL",
+           "ESPIRITO SANTO",
+           "GOIÁS",
+           "MARANHÃO",
+           "MATO GROSSO",
+           "MATO GROSSO DO SUL",
+           "MINAS GERAIS",
+           "PARÁ",
+           "PARAÍBA",
+           "PARANÁ",
+           "PERNAMBUCO",
+           "PIAUÍ",
+           "RIO DE JANEIRO",
+           "RIO GRANDE DO NORTE",
+           "RIO GRANDE DO SUL",
+           "RONDÔNIA",
+           "RORAIMA",
+           "SANTA CATARINA",
+           "SÃO PAULO",
+           "SERGIPE",
+           "TOCANTINS"
+)
+
+names(InadEST)<-Estados
+names(InadESTPF)<-Estados
+names(InadESTPJ)<-Estados
+
+InadEST<-lapply(InadEST, tail, 1)
+InadESTPF<-lapply(InadESTPF, tail, 1)
+InadESTPJ<-lapply(InadESTPJ, tail, 1)
+
+
+InadEST<-data.frame(Estados = Estados,
+                    Inadimplencia = c(InadEST$`ACRE`$value,
+                                      InadEST$`ALAGOAS`$value,
+                                      InadEST$`AMAPÁ`$value,
+                                      InadEST$`AMAZONAS`$value,
+                                      InadEST$`BAHIA`$value,
+                                      InadEST$`CEARÁ`$value,
+                                      InadEST$`DISTRITO FEDERAL`$value,
+                                      InadEST$`ESPIRITO SANTO`$value,
+                                      InadEST$`GOIÁS`$value,
+                                      InadEST$`MARANHÃO`$value,
+                                      InadEST$`MATO GROSSO`$value,
+                                      InadEST$`MATO GROSSO DO SUL`$value,
+                                      InadEST$`MINAS GERAIS`$value,
+                                      InadEST$`PARÁ`$value,
+                                      InadEST$`PARAÍBA`$value,
+                                      InadEST$`PARANÁ`$value,
+                                      InadEST$`PERNAMBUCO`$value,
+                                      InadEST$`PIAUÍ`$value,
+                                      InadEST$`RIO DE JANEIRO`$value,
+                                      InadEST$`RIO GRANDE DO NORTE`$value,
+                                      InadEST$`RIO GRANDE DO SUL`$value,
+                                      InadEST$`RONDÔNIA`$value,
+                                      InadEST$`RORAIMA`$value,
+                                      InadEST$`SANTA CATARINA`$value,
+                                      InadEST$`SÃO PAULO`$value,
+                                      InadEST$`SERGIPE`$value,
+                                      InadEST$`TOCANTINS`$value)
+)
+
+InadESTPF<-data.frame(Estados = Estados,
+                    Inadimplencia = c(InadESTPF$`ACRE`$value,
+                                      InadESTPF$`ALAGOAS`$value,
+                                      InadESTPF$`AMAPÁ`$value,
+                                      InadESTPF$`AMAZONAS`$value,
+                                      InadESTPF$`BAHIA`$value,
+                                      InadESTPF$`CEARÁ`$value,
+                                      InadESTPF$`DISTRITO FEDERAL`$value,
+                                      InadESTPF$`ESPIRITO SANTO`$value,
+                                      InadESTPF$`GOIÁS`$value,
+                                      InadESTPF$`MARANHÃO`$value,
+                                      InadESTPF$`MATO GROSSO`$value,
+                                      InadESTPF$`MATO GROSSO DO SUL`$value,
+                                      InadESTPF$`MINAS GERAIS`$value,
+                                      InadESTPF$`PARÁ`$value,
+                                      InadESTPF$`PARAÍBA`$value,
+                                      InadESTPF$`PARANÁ`$value,
+                                      InadESTPF$`PERNAMBUCO`$value,
+                                      InadESTPF$`PIAUÍ`$value,
+                                      InadESTPF$`RIO DE JANEIRO`$value,
+                                      InadESTPF$`RIO GRANDE DO NORTE`$value,
+                                      InadESTPF$`RIO GRANDE DO SUL`$value,
+                                      InadESTPF$`RONDÔNIA`$value,
+                                      InadESTPF$`RORAIMA`$value,
+                                      InadESTPF$`SANTA CATARINA`$value,
+                                      InadESTPF$`SÃO PAULO`$value,
+                                      InadESTPF$`SERGIPE`$value,
+                                      InadESTPF$`TOCANTINS`$value)
+)
+
+InadESTPJ<-data.frame(Estados = Estados,
+                    Inadimplencia = c(InadESTPJ$`ACRE`$value,
+                                      InadESTPJ$`ALAGOAS`$value,
+                                      InadESTPJ$`AMAPÁ`$value,
+                                      InadESTPJ$`AMAZONAS`$value,
+                                      InadESTPJ$`BAHIA`$value,
+                                      InadESTPJ$`CEARÁ`$value,
+                                      InadESTPJ$`DISTRITO FEDERAL`$value,
+                                      InadESTPJ$`ESPIRITO SANTO`$value,
+                                      InadESTPJ$`GOIÁS`$value,
+                                      InadESTPJ$`MARANHÃO`$value,
+                                      InadESTPJ$`MATO GROSSO`$value,
+                                      InadESTPJ$`MATO GROSSO DO SUL`$value,
+                                      InadESTPJ$`MINAS GERAIS`$value,
+                                      InadESTPJ$`PARÁ`$value,
+                                      InadESTPJ$`PARAÍBA`$value,
+                                      InadESTPJ$`PARANÁ`$value,
+                                      InadESTPJ$`PERNAMBUCO`$value,
+                                      InadESTPJ$`PIAUÍ`$value,
+                                      InadESTPJ$`RIO DE JANEIRO`$value,
+                                      InadESTPJ$`RIO GRANDE DO NORTE`$value,
+                                      InadESTPJ$`RIO GRANDE DO SUL`$value,
+                                      InadESTPJ$`RONDÔNIA`$value,
+                                      InadESTPJ$`RORAIMA`$value,
+                                      InadESTPJ$`SANTA CATARINA`$value,
+                                      InadESTPJ$`SÃO PAULO`$value,
+                                      InadESTPJ$`SERGIPE`$value,
+                                      InadESTPJ$`TOCANTINS`$value)
+)
+
 # Banco #
 
 #Marketshare - Pizza
@@ -121,6 +278,9 @@ addWorksheet(Series, "PIBVA")
 addWorksheet(Series, "Varejo")
 addWorksheet(Series, "Servicos")
 addWorksheet(Series, "ExpBR")
+addWorksheet(Series, "InadEST")
+addWorksheet(Series, "InadESTPF")
+addWorksheet(Series, "InadESTPJ")
 
 
 writeData(Series, "PIBT", PIBT)
@@ -165,5 +325,9 @@ writeData(Series, "PIBVA", PIBVA)
 writeData(Series, "Varejo", Varejo)
 writeData(Series, "Servicos", Servicos)
 writeData(Series, "ExpBR", ExpBR)
+writeData(Series, "InadEST", InadEST)
+writeData(Series, "InadESTPF", InadESTPF)
+writeData(Series, "InadESTPJ", InadESTPJ)
+
 
 saveWorkbook(Series, "Series.xlsx", overwrite = TRUE)
