@@ -1745,25 +1745,31 @@ server <- function(input, output) {
   output$plot22<-renderPlotly({g22})
   output$plot23<-renderPlotly({g23})
   
-  output$m1<-renderLeaflet({
+    output$m1<-renderLeaflet({
+    tmap_mode("view")
     InadEST<-inner_join(Estados, InadEST, by = c("NM_ESTADO" = "Estados"))
     InadEST<-InadEST[, c(3,1,2,4,5,6)]
     m1<-tm_shape(InadEST, name = "Mapa da Inadimplência") +
       tm_polygons("Inadimplencia", palette = "Reds", title = "")
+    tmap_leaflet(m1)
   })
   
   output$m2<-renderLeaflet({
+    tmap_mode("view")
     InadESTPF<-inner_join(Estados, InadESTPF, by = c("NM_ESTADO" = "Estados"))
     InadESTPF<-InadESTPF[, c(3,1,2,4,5,6)]
     m2<-tm_shape(InadESTPF, name = "Mapa da Inadimplência") +
       tm_polygons("Inadimplencia", palette = "Reds", title = "")
+    tmap_leaflet(m2)
   })
   
   output$m3<-renderLeaflet({
+    tmap_mode("view")
     InadESTPJ<-inner_join(Estados, InadESTPJ, by = c("NM_ESTADO" = "Estados"))
     InadESTPJ<-InadESTPJ[, c(3,1,2,4,5,6)]
     m3<-tm_shape(InadESTPJ, name = "Mapa da Inadimplência") +
       tm_polygons("Inadimplencia", palette = "Reds", title = "")
+    tmap_leaflet(m3)
   })
 }
 
