@@ -72,7 +72,7 @@ InadPJES<-BETSget(15900, data.frame = TRUE)
 ExpES<-BETSget(13386, data.frame = TRUE) # exportação de bens milhares de US$
 CestaVix<-BETSget(7494, data.frame = TRUE) # Indice
 
-# Inadimplência #
+# Series por estado #
 
 InadEST<-BETSget(
   c(15925, 15926, 15927, 15928, 15929,
@@ -117,10 +117,10 @@ IBCEST<-BETSget(
     25394),
   data.frame=TRUE)
 
-Estados<-c("ACRE","ALAGOAS","AMAPÁ","AMAZONAS","BAHIA","CEARÁ","DISTRITOFEDERAL","ESPIRITOSANTO","GOIÁS",
-           "MARANHÃO","MATOGROSSO","MATOGROSSODOSUL","MINASGERAIS","PARÁ","PARAÍBA","PARANÁ","PERNAMBUCO",
-           "PIAUÍ","RIODEJANEIRO","RIOGRANDEDONORTE","RIOGRANDEDOSUL","RONDÔNIA","RORAIMA","SANTACATARINA",
-           "SÃOPAULO","SERGIPE","TOCANTINS")
+Estados<-c("ACRE","ALAGOAS","AMAPÁ","AMAZONAS","BAHIA","CEARÁ","DISTRITO FEDERAL","ESPIRITO SANTO","GOIÁS",
+           "MARANHÃO","MATO GROSSO","MATO GROSSO DO SUL","MINAS GERAIS","PARÁ","PARAÍBA","PARANÁ","PERNAMBUCO",
+           "PIAUÍ","RIO DE JANEIRO","RIO GRANDE DO NORTE","RIO GRANDE DO SUL","RONDÔNIA","RORAIMA","SANTA CATARINA",
+           "SÃO PAULO","SERGIPE","TOCANTINS")
 
 # Buscando apenas último dado de cada estado
 InadEST<-lapply(InadEST, tail, 1)
