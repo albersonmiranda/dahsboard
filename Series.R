@@ -4,6 +4,9 @@ options("scipen"=20)
 ## Pacotes ##
 library(BETS)
 library(openxlsx)
+library(data.table)
+library(plyr)
+library(dplyr)
 
 ## Series ##
 
@@ -98,134 +101,64 @@ InadESTPJ<-BETSget(
    15918, 15919),
   data.frame = TRUE)
 
-Estados<-c("ACRE",
-           "ALAGOAS",
-           "AMAPÁ",
-           "AMAZONAS",
-           "BAHIA",
-           "CEARÁ",
-           "DISTRITO FEDERAL",
-           "ESPIRITO SANTO",
-           "GOIÁS",
-           "MARANHÃO",
-           "MATO GROSSO",
-           "MATO GROSSO DO SUL",
-           "MINAS GERAIS",
-           "PARÁ",
-           "PARAÍBA",
-           "PARANÁ",
-           "PERNAMBUCO",
-           "PIAUÍ",
-           "RIO DE JANEIRO",
-           "RIO GRANDE DO NORTE",
-           "RIO GRANDE DO SUL",
-           "RONDÔNIA",
-           "RORAIMA",
-           "SANTA CATARINA",
-           "SÃO PAULO",
-           "SERGIPE",
-           "TOCANTINS"
-)
+PIBEST<-BETSget(
+  c(24112,24113,24114,24075,
+    23992,24093,23994,24071,
+    23988,23990,23996,24115,
+    24324,24073,24100,24000,
+    24116,24117,24327,24277,
+    24118),
+  data.frame = TRUE)
 
-names(InadEST)<-Estados
-names(InadESTPF)<-Estados
-names(InadESTPJ)<-Estados
+IBCEST<-BETSget(
+  c(25412,25416,25391,25399,
+    25384,25380,25410,25413,
+    25418,25397,25404,25405,
+    25394),
+  data.frame=TRUE)
 
+Estados<-c("ACRE","ALAGOAS","AMAPÁ","AMAZONAS","BAHIA","CEARÁ","DISTRITOFEDERAL","ESPIRITOSANTO","GOIÁS",
+           "MARANHÃO","MATOGROSSO","MATOGROSSODOSUL","MINASGERAIS","PARÁ","PARAÍBA","PARANÁ","PERNAMBUCO",
+           "PIAUÍ","RIODEJANEIRO","RIOGRANDEDONORTE","RIOGRANDEDOSUL","RONDÔNIA","RORAIMA","SANTACATARINA",
+           "SÃOPAULO","SERGIPE","TOCANTINS")
+
+# Buscando apenas último dado de cada estado
 InadEST<-lapply(InadEST, tail, 1)
 InadESTPF<-lapply(InadESTPF, tail, 1)
 InadESTPJ<-lapply(InadESTPJ, tail, 1)
+PIBEST<-lapply(PIBEST, tail, 1)
+IBCEST<-lapply(IBCEST, tail, 1)
 
+# Concatenando estados em único data frame
+InadEST<-rbindlist(InadEST)
+InadESTPF<-rbindlist(InadESTPF)
+InadESTPJ<-rbindlist(InadESTPJ)
+PIBEST<-rbindlist(PIBEST)
+IBCEST<-rbindlist(IBCEST)
 
-InadEST<-data.frame(Estados = Estados,
-                    Inadimplencia = c(InadEST$`ACRE`$value,
-                                      InadEST$`ALAGOAS`$value,
-                                      InadEST$`AMAPÁ`$value,
-                                      InadEST$`AMAZONAS`$value,
-                                      InadEST$`BAHIA`$value,
-                                      InadEST$`CEARÁ`$value,
-                                      InadEST$`DISTRITO FEDERAL`$value,
-                                      InadEST$`ESPIRITO SANTO`$value,
-                                      InadEST$`GOIÁS`$value,
-                                      InadEST$`MARANHÃO`$value,
-                                      InadEST$`MATO GROSSO`$value,
-                                      InadEST$`MATO GROSSO DO SUL`$value,
-                                      InadEST$`MINAS GERAIS`$value,
-                                      InadEST$`PARÁ`$value,
-                                      InadEST$`PARAÍBA`$value,
-                                      InadEST$`PARANÁ`$value,
-                                      InadEST$`PERNAMBUCO`$value,
-                                      InadEST$`PIAUÍ`$value,
-                                      InadEST$`RIO DE JANEIRO`$value,
-                                      InadEST$`RIO GRANDE DO NORTE`$value,
-                                      InadEST$`RIO GRANDE DO SUL`$value,
-                                      InadEST$`RONDÔNIA`$value,
-                                      InadEST$`RORAIMA`$value,
-                                      InadEST$`SANTA CATARINA`$value,
-                                      InadEST$`SÃO PAULO`$value,
-                                      InadEST$`SERGIPE`$value,
-                                      InadEST$`TOCANTINS`$value)
-)
+# Renomear linhas
+InadEST$Estado<-Estados
+InadESTPF$Estado<-Estados
+InadESTPJ$Estado<-Estados
+PIBEST$Estado<-Estados[c(1,3,4,6,7,8,9,10,11,12,13,14,16,18,19,21,22,23,24,25,27)]
+IBCEST$Estado<-Estados[c(4:6, 8:9, 13:14, 16:17, 19, 21, 24:25)]
 
-InadESTPF<-data.frame(Estados = Estados,
-                    Inadimplencia = c(InadESTPF$`ACRE`$value,
-                                      InadESTPF$`ALAGOAS`$value,
-                                      InadESTPF$`AMAPÁ`$value,
-                                      InadESTPF$`AMAZONAS`$value,
-                                      InadESTPF$`BAHIA`$value,
-                                      InadESTPF$`CEARÁ`$value,
-                                      InadESTPF$`DISTRITO FEDERAL`$value,
-                                      InadESTPF$`ESPIRITO SANTO`$value,
-                                      InadESTPF$`GOIÁS`$value,
-                                      InadESTPF$`MARANHÃO`$value,
-                                      InadESTPF$`MATO GROSSO`$value,
-                                      InadESTPF$`MATO GROSSO DO SUL`$value,
-                                      InadESTPF$`MINAS GERAIS`$value,
-                                      InadESTPF$`PARÁ`$value,
-                                      InadESTPF$`PARAÍBA`$value,
-                                      InadESTPF$`PARANÁ`$value,
-                                      InadESTPF$`PERNAMBUCO`$value,
-                                      InadESTPF$`PIAUÍ`$value,
-                                      InadESTPF$`RIO DE JANEIRO`$value,
-                                      InadESTPF$`RIO GRANDE DO NORTE`$value,
-                                      InadESTPF$`RIO GRANDE DO SUL`$value,
-                                      InadESTPF$`RONDÔNIA`$value,
-                                      InadESTPF$`RORAIMA`$value,
-                                      InadESTPF$`SANTA CATARINA`$value,
-                                      InadESTPF$`SÃO PAULO`$value,
-                                      InadESTPF$`SERGIPE`$value,
-                                      InadESTPF$`TOCANTINS`$value)
-)
+# Renomear colunas
+colnames(InadEST)[2] = "InadEST"
+colnames(InadESTPF)[2] = "InadESTPF"
+colnames(InadESTPJ)[2] = "InadESTPJ"
+colnames(PIBEST)[2] = "PIBEST"
+colnames(IBCEST)[2] = "IBCEST"
 
-InadESTPJ<-data.frame(Estados = Estados,
-                    Inadimplencia = c(InadESTPJ$`ACRE`$value,
-                                      InadESTPJ$`ALAGOAS`$value,
-                                      InadESTPJ$`AMAPÁ`$value,
-                                      InadESTPJ$`AMAZONAS`$value,
-                                      InadESTPJ$`BAHIA`$value,
-                                      InadESTPJ$`CEARÁ`$value,
-                                      InadESTPJ$`DISTRITO FEDERAL`$value,
-                                      InadESTPJ$`ESPIRITO SANTO`$value,
-                                      InadESTPJ$`GOIÁS`$value,
-                                      InadESTPJ$`MARANHÃO`$value,
-                                      InadESTPJ$`MATO GROSSO`$value,
-                                      InadESTPJ$`MATO GROSSO DO SUL`$value,
-                                      InadESTPJ$`MINAS GERAIS`$value,
-                                      InadESTPJ$`PARÁ`$value,
-                                      InadESTPJ$`PARAÍBA`$value,
-                                      InadESTPJ$`PARANÁ`$value,
-                                      InadESTPJ$`PERNAMBUCO`$value,
-                                      InadESTPJ$`PIAUÍ`$value,
-                                      InadESTPJ$`RIO DE JANEIRO`$value,
-                                      InadESTPJ$`RIO GRANDE DO NORTE`$value,
-                                      InadESTPJ$`RIO GRANDE DO SUL`$value,
-                                      InadESTPJ$`RONDÔNIA`$value,
-                                      InadESTPJ$`RORAIMA`$value,
-                                      InadESTPJ$`SANTA CATARINA`$value,
-                                      InadESTPJ$`SÃO PAULO`$value,
-                                      InadESTPJ$`SERGIPE`$value,
-                                      InadESTPJ$`TOCANTINS`$value)
-)
-
+# Criar data frame
+dmap<-data.frame(Estado = Estados)
+dmap<-join_all(
+  list(dmap, InadEST, InadESTPF, InadESTPJ, PIBEST, IBCEST),
+  type = "left", by = "Estado", match = "first"
+  )
+dmap<-dmap[, !duplicated(colnames(dmap))]
+dmap %>% select(Estado, InadEST, InadESTPF, InadESTPJ, PIBEST, IBCEST)
+  
 # Banco #
 
 #Marketshare - Pizza
@@ -278,9 +211,7 @@ addWorksheet(Series, "PIBVA")
 addWorksheet(Series, "Varejo")
 addWorksheet(Series, "Servicos")
 addWorksheet(Series, "ExpBR")
-addWorksheet(Series, "InadEST")
-addWorksheet(Series, "InadESTPF")
-addWorksheet(Series, "InadESTPJ")
+addWorksheet(Series, "dmap")
 
 
 writeData(Series, "PIBT", PIBT)
@@ -325,9 +256,7 @@ writeData(Series, "PIBVA", PIBVA)
 writeData(Series, "Varejo", Varejo)
 writeData(Series, "Servicos", Servicos)
 writeData(Series, "ExpBR", ExpBR)
-writeData(Series, "InadEST", InadEST)
-writeData(Series, "InadESTPF", InadESTPF)
-writeData(Series, "InadESTPJ", InadESTPJ)
+writeData(Series, "dmap", dmap)
 
 
 saveWorkbook(Series, "Series.xlsx", overwrite = TRUE)
