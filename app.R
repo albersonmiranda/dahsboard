@@ -1,6 +1,3 @@
-## Options ##
-options("scipen"=20)
-
 ## Pacotes ##
 library(shiny)
 library(shinydashboard)
@@ -14,6 +11,9 @@ library(tmap)
 library(dplyr)
 library(leaflet)
 
+## Options ##
+options("scipen"=20)
+tmap_mode("view")
 
 ## Series ##
 
@@ -76,9 +76,7 @@ ICV<-read.xlsx('Series.xlsx', sheet = 17); ICV$date<-convertToDate(ICV$date)
 CestaVix<-read.xlsx('Series.xlsx', sheet = 38); CestaVix$date<-convertToDate(CestaVix$date)
 
 # Inadimplência por Estado
-InadEST<-read.xlsx('Series.xlsx', sheet = 43)
-InadESTPF<-read.xlsx('Series.xlsx', sheet = 44)
-InadESTPJ<-read.xlsx('Series.xlsx', sheet = 45)
+dmap<-read.xlsx('Series.xlsx', sheet = 43)
 
 lb<- 4 # Largura Boxes
 # Altura Boxes
@@ -1530,56 +1528,27 @@ Box15<-
     )
   )
 
-# Mapa da Inadimplência
+# Mapa BR
 Boxm1<-
   boxPlus(
-    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
+    title = tags$b("BRASIL", style = 'font-family: "Georgia"'),
     closable = FALSE, 
-    width = lb,
+    width = 6,
     status = "danger", 
     solidHeader = TRUE, 
     collapsible = TRUE,
+    collapsed = FALSE,
     enable_dropdown = FALSE,
-    tags$b("Inadimplência", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias, pessoas físicas e jurídicas, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
+    enable_sidebar = TRUE,
+    sidebar_start_open = TRUE,
+    sidebar_width = 25,
+    sidebar_content = selectInput(
+      "idm1", "série", c("PIB", "IBC","Inadimplência", "Inadimplência PF", "Inadimplência PJ")
+    ),
+    tags$b("", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     leafletOutput("m1"),
-    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
-    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
-    footer = NULL
-  )
-
-# Mapa da Inadimplência PF
-Boxm2<-
-  boxPlus(
-    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = lb,
-    status = "danger", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    tags$b("Inadimplência pessoa física", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
-    leafletOutput("m2"),
-    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
-    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
-    footer = NULL
-  )
-
-# Mapa da Inadimplência PJ
-Boxm3<-
-  boxPlus(
-    title = tags$b("Mapa da Inadimplência", style = 'font-family: "Georgia"'),
-    closable = FALSE, 
-    width = lb,
-    status = "danger", 
-    solidHeader = TRUE, 
-    collapsible = TRUE,
-    enable_dropdown = FALSE,
-    tags$b("Inadimplência pessoa jurídica", style = 'text-align: left; font-family: "Georgia"; font-size: 18px; color: #808080;'),
-    tags$p("Vencimento superior a 90 dias, mensal", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
-    leafletOutput("m3"),
-    tags$p("Fonte: Banco Central do Brasil", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
+    tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 12px; color: #808080'),
     tags$p("", style = 'text-align: left; font-family: "Georgia"; font-size: 14px; color: #808080'),
     footer = NULL
   )
@@ -1705,9 +1674,8 @@ body <- dashboardBody(
                    BoxT2 # Titulo
             ),
             fluidRow(
-              Boxm1, # Inadimplência
-              Boxm2, # Inadimplência PF
-              Boxm3 # Inadimplência PJ
+              Boxm1 # BR
+              #Boxm2 # ES
             ),
             column(4, align = "center", offset = 4,
                    Boxu # Apresentacao
@@ -1720,6 +1688,37 @@ ui<-dashboardPagePlus(header, sidebar, body)
 
 ## Server ##
 server <- function(input, output) {
+  
+  i <- function(if_stat, then) {
+    if_stat <- lazyeval::expr_text(if_stat)
+    then    <- lazyeval::expr_text(then)
+    sprintf("ifelse(%s, %s, ", if_stat, then)
+  }
+  
+  #' @rdname i
+  #' @export
+  e <- function(else_ret) {
+    else_ret <- lazyeval::expr_text(else_ret)
+    else_ret
+  }
+  
+  #' @rdname i
+  #' @export
+  ie <- function(...) {
+    args <- list(...)
+    
+    for (i in 1:(length(args) - 1) ) {
+      if (substr(args[[i]], 1, 6) != "ifelse") {
+        stop("All but the last argument, need to be i functions.", call. = FALSE)
+      }
+    }
+    if (substr(args[[length(args)]], 1, 6) == "ifelse"){
+      stop("Last argument needs to be an e function.", call. = FALSE)
+    }
+    args$final <- paste(rep(')', length(args) - 1), collapse = '')
+    eval_string <- do.call('paste', args)
+    eval(parse(text = eval_string))
+  }
   
   output$plot1<-renderPlotly({g1})
   output$plot2<-renderPlotly({g2})
@@ -1746,31 +1745,21 @@ server <- function(input, output) {
   output$plot23<-renderPlotly({g23})
   
   output$m1<-renderLeaflet({
-    tmap_mode("view")
-    InadEST<-inner_join(Estados, InadEST, by = c("NM_ESTADO" = "Estados"))
-    InadEST<-InadEST[, c(3,1,2,4,5,6)]
-    m1<-tm_shape(InadEST, name = "Mapa da Inadimplência") +
-      tm_polygons("Inadimplencia", palette = "Reds", title = "")
+    map<-inner_join(Estados, dmap, by = c("NM_ESTADO" = "Estado"))
+    map<-map[, c(3,1,2,4,5,6,7,8,9,10)]
+    m1<-tm_shape(map,name = "Mapa") +
+      tm_polygons(ie(
+        i(input$idm1 == "PIB", "PIBEST"),
+        i(input$idm1 == "IBC", "IBCEST"),
+        i(input$idm1 == "Inadimplência", "InadEST"),
+        i(input$idm1 == "Inadimplência PF", "InadESTPF"),
+        i(input$idm1 == "Inadimplência PJ", "InadESTPJ"),
+        e("Hello World")
+      ),
+                  palette = "Reds", title = "")
     tmap_leaflet(m1)
   })
-  
-  output$m2<-renderLeaflet({
-    tmap_mode("view")
-    InadESTPF<-inner_join(Estados, InadESTPF, by = c("NM_ESTADO" = "Estados"))
-    InadESTPF<-InadESTPF[, c(3,1,2,4,5,6)]
-    m2<-tm_shape(InadESTPF, name = "Mapa da Inadimplência") +
-      tm_polygons("Inadimplencia", palette = "Reds", title = "")
-    tmap_leaflet(m2)
-  })
-  
-  output$m3<-renderLeaflet({
-    tmap_mode("view")
-    InadESTPJ<-inner_join(Estados, InadESTPJ, by = c("NM_ESTADO" = "Estados"))
-    InadESTPJ<-InadESTPJ[, c(3,1,2,4,5,6)]
-    m3<-tm_shape(InadESTPJ, name = "Mapa da Inadimplência") +
-      tm_polygons("Inadimplencia", palette = "Reds", title = "")
-    tmap_leaflet(m3)
-  })
+
 }
 
 ## App ##
