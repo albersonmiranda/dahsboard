@@ -42,8 +42,9 @@ IBCBr = BETSget(24364, data.frame = TRUE)
 Varejo = BETSget(28473, data.frame = TRUE) # índice volume de vendas no varejo dessazonalizado
 Servicos = BETSget(21637, data.frame = TRUE) # índice receita nominal de serviços
 ICC = BETSget(4393, data.frame = TRUE) # índice confiança do consumidor
-ICE = BETSget(4394, data.frame = TRUE) # índico de condições econômicas atuais
+ICE = BETSget(4394, data.frame = TRUE) # índice de condições econômicas atuais
 IEF = BETSget(4395, data.frame = TRUE) # índice de expectativas futuras
+ExpBR = BETSget(22708, data.frame = TRUE) # exportação de bens free on board
 
 # Mercado de trabalho ----
 Emprego = BETSget(25239, data.frame = TRUE) # índice de emprego formal
@@ -87,6 +88,7 @@ IBCRES = BETSget(25399, data.frame = TRUE) # dessazonalizado
 # Serviços e Comércio ----
 VarejoES = BETSget(1473, data.frame = TRUE) # índice volume de vendas no varejo
 ServicosES = BETSget(28033, data.frame = TRUE) # índice pesquisa mensal serviços
+ExpES = BETSget(13386, data.frame = TRUE) # exportação de bens em US$ milhares
 
 # Mercado de Trabalho ----
 EmpregoES = BETSget(28308, data.frame = TRUE) # índice de emprego formal
