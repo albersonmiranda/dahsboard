@@ -59,8 +59,8 @@ AtividadeES<-BETSget(25398, data.frame = TRUE) # Indice de atividade economica r
 AtividadeESs<-BETSget(25399, data.frame = TRUE)
 
 VarejoES<-BETSget(1473, data.frame = TRUE, from = "2012-01-01") # Indice volume de vendas no varejo
-ServicosES<-BETSget(21728, data.frame = TRUE) # Indice Receita nominal de serviços
-EmpregoES<-BETSget(12781, data.frame = TRUE) # Nivel de Emprego Formal
+ServicosES<-BETSget(28033, data.frame = TRUE) # Pesquisa mensal de serviços
+EmpregoES<-BETSget(12985, data.frame = TRUE) # Emprego Formal Gerado
 
 SaldoPFES<-BETSget(14009, data.frame = TRUE) # milhoes
 SaldoPJES<-BETSget(14036, data.frame = TRUE)

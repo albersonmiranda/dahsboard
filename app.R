@@ -194,17 +194,13 @@ Boxu<-widgetUserBox(
   subtitle = "Desenvolvedor",
   width = 12,
   type = 2,
-  src = "https://avatars0.githubusercontent.com/u/45690517?s=400&v=4",
+  src = "https://avatars0.githubusercontent.com/u/45690517?s=460&u=776625db00265aef0e73c2048db62e2ca57be26d&v=4",
   color = "yellow",
   "albersonmiranda@banestes.com.br",
   footer =  list(
     socialButton(
       url = "https://github.com/albersonmiranda",
       type = "github"
-    ),
-    socialButton(
-      url = "https://www.facebook.com/alberson.miranda",
-      type = "facebook"
     ),
     socialButton(
       url = "https://twitter.com/AlbersonMiranda",
@@ -555,7 +551,7 @@ g23 <- plot_ly(data = datag4, x=~x, y=~y,
 ## Mapas ##
 
 # Estados
-Estados<-st_read("./Brasil/UFEBRASIL.shp", stringsAsFactors = FALSE)
+Estados<-st_read("Shapefiles/Brasil/UFEBRASIL.shp", stringsAsFactors = FALSE)
 
 ## Body ##
 
@@ -594,12 +590,12 @@ Box20<-
         descriptionBlock(
           number = paste(round(
             tail(PIBVA$value,1), 2), "%"), 
-          number_color = if(tail(PIBVA$value,1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(PIBVA$value,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(PIBVA$value,1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(PIBVA$value,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = NULL, 
           text = "var. % PIB", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -626,24 +622,24 @@ Box1<-
         descriptionBlock(
           number = paste(round(
             tail(PIBT$value,1)-head(tail(PIBT$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(PIBT$value,1)-head(tail(PIBT$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(PIBT$value,1)-head(tail(PIBT$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(PIBT$value,1)-head(tail(PIBT$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(PIBT$value,1)-head(tail(PIBT$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(PIBT$value,1), tail(months(PIBT$date),1)), 
           text = "PIB", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(PIBTs$value,1)-head(tail(PIBTs$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(PIBTs$value,1)-head(tail(PIBTs$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(PIBTs$value,1)-head(tail(PIBTs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(PIBTs$value,1)-head(tail(PIBTs$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(PIBTs$value,1)-head(tail(PIBTs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(PIBTs$value,1), tail(months(PIBTs$date),1)),
           text = "PIB Dessazonalizado", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -670,24 +666,24 @@ Box2<-
         descriptionBlock(
           number = paste(round(
             tail(IBCBr$value,1)-head(tail(IBCBr$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IBCBr$value,1)-head(tail(IBCBr$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(IBCBr$value,1)-head(tail(IBCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(IBCBr$value,1)-head(tail(IBCBr$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(IBCBr$value,1)-head(tail(IBCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(IBCBr$value,1), tail(months(IBCBr$date),1)), 
           text = "IBC-Br", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(IBCBrs$value,1)-head(tail(IBCBrs$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IBCBrs$value,1)-head(tail(IBCBrs$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(IBCBrs$value,1)-head(tail(IBCBrs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(IBCBrs$value,1)-head(tail(IBCBrs$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(IBCBrs$value,1)-head(tail(IBCBrs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(IBCBrs$value,1), tail(months(IBCBrs$date),1)), 
           text = "IBC-Br Dessazonalizado", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -715,24 +711,24 @@ Box21<-
         descriptionBlock(
           number = paste(round(
             tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(Varejo$value,1)-head(tail(Varejo$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Varejo$value,1), tail(months(Varejo$date),1)), 
           text = "Varejo", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(Servicos$value,1)-head(tail(Servicos$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Servicos$value,1), tail(months(Servicos$date),1)), 
           text = "Serviços", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -759,12 +755,12 @@ Box22<-
         descriptionBlock(
           number = paste("US$",round(
             (tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1))/1000, 2), "bi"), 
-          number_color = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(ExpBR$value,1)-head(tail(ExpBR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste("US$",round(tail(ExpBR$value/1000,1),1), "bi", tail(months(ExpBR$date),1)), 
           text = "Exportações", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -792,12 +788,12 @@ Box23<-
         descriptionBlock(
           number = paste(round(
             tail(datag4$y,1), 2), "%"), 
-          number_color = if(tail(datag4$y,1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(datag4$y,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(datag4$y,1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(datag4$y,1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = NULL, 
           text = "var. % PIB", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -825,12 +821,12 @@ Box3<-
         descriptionBlock(
           number = paste(round(
             ((tail(datag3$y,1)/head(tail(datag3$y, 2), 1))-1)*100, 2), "%"), 
-          number_color = if(tail(datag3$y,1)-head(tail(datag3$y, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(datag3$y,1)-head(tail(datag3$y, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(datag3$y,1)-head(tail(datag3$y, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(datag3$y,1)-head(tail(datag3$y, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(datag3$y,1)/1000000000, "bi"), 
           text = "PIB ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -857,24 +853,24 @@ Box4<-
         descriptionBlock(
           number = paste(round(
             tail(AtividadeES$value,1)-head(tail(AtividadeES$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(AtividadeES$value,1)-head(tail(AtividadeES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(AtividadeES$value,1)-head(tail(AtividadeES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(AtividadeES$value,1)-head(tail(AtividadeES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(AtividadeES$value,1)-head(tail(AtividadeES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(AtividadeES$value,1), tail(months(AtividadeES$date),1)), 
           text = "IAERES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(AtividadeESs$value,1)-head(tail(AtividadeESs$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(AtividadeESs$value,1)-head(tail(AtividadeESs$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(AtividadeESs$value,1)-head(tail(AtividadeESs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(AtividadeESs$value,1)-head(tail(AtividadeESs$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(AtividadeESs$value,1)-head(tail(AtividadeESs$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(AtividadeESs$value,1), tail(months(AtividadeESs$date),1)), 
           text = "IAERES Dessazonalizado", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -902,24 +898,24 @@ Box13<-
         descriptionBlock(
           number = paste(round(
             tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(VarejoES$value,1)-head(tail(VarejoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(VarejoES$value,1), tail(months(VarejoES$date),1)), 
           text = "Varejo ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(ServicosES$value,1)-head(tail(ServicosES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(ServicosES$value,1), tail(months(ServicosES$date),1)), 
           text = "Serviços ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -946,12 +942,12 @@ Box18<-
         descriptionBlock(
           number = paste("US$",round(
             (tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1))/1000, 2), "mi"), 
-          number_color = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(ExpES$value,1)-head(tail(ExpES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste("US$",tail(ExpES$value/1000,1), "mi", tail(months(ExpES$date),1)), 
           text = "Exportações", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -978,12 +974,12 @@ Box9<-
         descriptionBlock(
           number = paste(round(
             tail(Selic$value,1)-head(tail(Selic$value, 2), 1), 2), "%"), 
-          number_color = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(Selic$value,1)-head(tail(Selic$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Selic$value,1), "%", tail(months(Selic$date),1)), 
           text = "Selic", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1010,12 +1006,12 @@ Box19<-
         descriptionBlock(
           number = paste('R$',round(
             tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1), 2), "/US$"), 
-          number_color = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(Dolar$value,1)-head(tail(Dolar$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste('R$',round(tail(Dolar$value,1),2), "/US$",tail(months(Dolar$date),1)), 
           text = "Dolar", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1042,12 +1038,12 @@ Box10<-
         descriptionBlock(
           number = paste(round(
             tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1), 2), "%"), 
-          number_color = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(Desemprego$value,1)-head(tail(Desemprego$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Desemprego$value,1), "%", tail(months(Desemprego$date),1)), 
           text = "Desemprego", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1074,12 +1070,12 @@ Box16<-
         descriptionBlock(
           number = paste(round(
             tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1), 2), "pts."), 
-          number_color = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(EmpregoES$value,1)-head(tail(EmpregoES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(EmpregoES$value,1), "pts.", tail(months(EmpregoES$date),1)), 
           text = "Emprego Formal ES", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1106,24 +1102,24 @@ Box7<-
         descriptionBlock(
           number = paste(round(
             tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(IPCA$value,1)-head(tail(IPCA$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(IPCA$value,1), tail(months(IPCA$date),1)), 
           text = "IPCA", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(IGPM$value,1)-head(tail(IGPM$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(IGPM$value,1), tail(months(IGPM$date),1)), 
           text = "IGPM", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     ),
@@ -1133,24 +1129,24 @@ Box7<-
         descriptionBlock(
           number = paste(round(
             tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(IPCBr$value,1)-head(tail(IPCBr$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(IPCBr$value,1), tail(months(IPCBr$date),1)), 
           text = "IPCBr", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(ICV$value,1)-head(tail(ICV$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(ICV$value,1)-head(tail(ICV$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(ICV$value,1), tail(months(ICV$date),1)), 
           text = "ICV", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1177,12 +1173,12 @@ Box17<-
         descriptionBlock(
           number = paste(round(
             tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1), 2), "pts."), 
-          number_color = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(CestaVix$value,1)-head(tail(CestaVix$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(CestaVix$value,1), "pts.", tail(months(CestaVix$date),1)), 
           text = "Cesta Básica", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1209,24 +1205,24 @@ Box5<-
         descriptionBlock(
           number = paste(round(
             tail(Consumo$value,1)-head(tail(Consumo$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(Consumo$value,1)-head(tail(Consumo$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(Consumo$value,1)-head(tail(Consumo$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Consumo$value,1)-head(tail(Consumo$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(Consumo$value,1)-head(tail(Consumo$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Consumo$value,1), tail(months(Consumo$date),1)), 
           text = "Consumo", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(Consumos$value,1)-head(tail(Consumos$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(Consumos$value,1)-head(tail(Consumos$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(Consumos$value,1)-head(tail(Consumos$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Consumos$value,1)-head(tail(Consumos$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(Consumos$value,1)-head(tail(Consumos$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Consumos$value,1), tail(months(Consumos$date),1)), 
           text = "Consumo Dessazonalizado", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1253,24 +1249,24 @@ Box8<-
         descriptionBlock(
           number = paste(round(
             tail(Renda$value,1)-head(tail(Renda$value, 2), 1), 2), "reais"), 
-          number_color = if(tail(Renda$value,1)-head(tail(Renda$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(Renda$value,1)-head(tail(Renda$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Renda$value,1)-head(tail(Renda$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(Renda$value,1)-head(tail(Renda$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste("R$", tail(Renda$value,1), "em",tail(months(Renda$date),1)), 
           text = "Renda Média", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(as.data.frame(Rendas$value),1)-head(tail(as.data.frame(Rendas$value), 2), 1), 2), "reais"), 
-          number_color = if(tail(as.data.frame(Rendas$value),1)-head(tail(as.data.frame(Rendas$value), 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(as.data.frame(Rendas$value),1)-head(tail(as.data.frame(Rendas$value), 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(as.data.frame(Rendas$value),1)-head(tail(as.data.frame(Rendas$value), 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(as.data.frame(Rendas$value),1)-head(tail(as.data.frame(Rendas$value), 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste("R$", round(tail(as.data.frame(Rendas$value),1), 2), "em", tail(months(Rendas$date),1)), 
           text = "Renda Média Dessazonalizada", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1297,24 +1293,24 @@ Box6<-
         descriptionBlock(
           number = paste(round(
             tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(CreditoR$value,1)-head(tail(CreditoR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(CreditoR$value,1), tail(months(CreditoR$date),1)), 
           text = "Demanda de Crédito", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1), 2), "pts"), 
-          number_color = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(OfertaR$value,1)-head(tail(OfertaR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(OfertaR$value,1), tail(months(OfertaR$date),1)), 
           text = "Oferta de Crédito", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1341,24 +1337,24 @@ Box11<-
         descriptionBlock(
           number = paste(round(
             tail(Endi$value,1)-head(tail(Endi$value, 2), 1), 2), "%"), 
-          number_color = if(tail(Endi$value,1)-head(tail(Endi$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(Endi$value,1)-head(tail(Endi$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(Endi$value,1)-head(tail(Endi$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(Endi$value,1)-head(tail(Endi$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(Endi$value,1), "%", tail(months(Endi$date),1)), 
           text = "Endiv.", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste(round(
             tail(End$value,1)-head(tail(End$value, 2), 1), 2), "%"), 
-          number_color = if(tail(End$value,1)-head(tail(End$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(End$value,1)-head(tail(End$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(End$value,1)-head(tail(End$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(End$value,1)-head(tail(End$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(End$value,1), "%", tail(months(End$date),1)), 
           text = "Endiv.(-imb.)", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1385,12 +1381,12 @@ Box12<-
         descriptionBlock(
           number = paste(round(
             tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadBR$value,1)-head(tail(InadBR$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadBR$value,1), "%", tail(months(InadBR$date),1)), 
           text = "Geral", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     ),
@@ -1400,12 +1396,12 @@ Box12<-
         descriptionBlock(
           number = paste(round(
             tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadBRPF$value,1)-head(tail(InadBRPF$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadBRPF$value,1), "%", tail(months(InadBRPF$date),1)), 
           text = "Pessoa Física", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ),
       column(
@@ -1413,12 +1409,12 @@ Box12<-
         descriptionBlock(
           number = paste(round(
             tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadBRPJ$value,1)-head(tail(InadBRPJ$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadBRPJ$value,1), "%", tail(months(InadBRPJ$date),1)), 
           text = "Pessoa Jurídica", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1445,12 +1441,12 @@ Box14<-
         descriptionBlock(
           number = paste(round(
             tail(InadES$value,1)-head(tail(InadES$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadES$value,1)-head(tail(InadES$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadES$value,1)-head(tail(InadES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadES$value,1)-head(tail(InadES$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadES$value,1)-head(tail(InadES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadES$value,1), "%", tail(months(InadES$date),1)), 
           text = "Geral", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     ),
@@ -1460,12 +1456,12 @@ Box14<-
         descriptionBlock(
           number = paste(round(
             tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadPFES$value,1)-head(tail(InadPFES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadPFES$value,1), "%", tail(months(InadPFES$date),1)), 
           text = "Pessoa Física", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ),
       column(
@@ -1473,12 +1469,12 @@ Box14<-
         descriptionBlock(
           number = paste(round(
             tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1), 2), "%"), 
-          number_color = if(tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1) >= 0) {"red"} else {"green"}, 
-          number_icon = if(tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1) >= 0) {"red"} else {"green"}, 
+          numberIcon = if(tail(InadPJES$value,1)-head(tail(InadPJES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste(tail(InadPJES$value,1), "%", tail(months(InadPJES$date),1)), 
           text = "Pessoa Jurídica", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1505,24 +1501,24 @@ Box15<-
         descriptionBlock(
           number = paste('R$',round(
             tail(SaldoPFES$value,1)-head(tail(SaldoPFES$value, 2), 1), 2), 'mi'), 
-          number_color = if(tail(SaldoPFES$value,1)-head(tail(SaldoPFES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(SaldoPFES$value,1)-head(tail(SaldoPFES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(SaldoPFES$value,1)-head(tail(SaldoPFES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(SaldoPFES$value,1)-head(tail(SaldoPFES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste('R$',tail(round(SaldoPFES$value/1000,1),1), 'bi',tail(months(SaldoPFES$date),1)), 
           text = "Pessoa Física", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       ), column(
         width = 6,
         descriptionBlock(
           number = paste('R$',round(
             tail(SaldoPJES$value,1)-head(tail(SaldoPJES$value, 2), 1), 2), 'mi'), 
-          number_color = if(tail(SaldoPJES$value,1)-head(tail(SaldoPJES$value, 2), 1) >= 0) {"green"} else {"red"}, 
-          number_icon = if(tail(SaldoPJES$value,1)-head(tail(SaldoPJES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
+          numberColor = if(tail(SaldoPJES$value,1)-head(tail(SaldoPJES$value, 2), 1) >= 0) {"green"} else {"red"}, 
+          numberIcon = if(tail(SaldoPJES$value,1)-head(tail(SaldoPJES$value, 2), 1) >= 0) {"fa fa-caret-up"} else {"fa fa-caret-down"},
           header = paste('R$',tail(round(SaldoPJES$value/1000,1),1), 'bi',tail(months(SaldoPJES$date),1)), 
           text = "Pessoa Jurídica", 
-          right_border = TRUE,
-          margin_bottom = FALSE
+          rightBorder = TRUE,
+          marginBottom = FALSE
         )
       )
     )
@@ -1682,7 +1678,7 @@ body <- dashboardBody(
             )
     )
   )
-  )
+)
 
 ui<-dashboardPagePlus(header, sidebar, body)
 
